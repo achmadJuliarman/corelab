@@ -9,8 +9,10 @@ use CodeIgniter\Router\RouteCollection;
 // ROUTE UNTUK LOGIN
 $routes->get('/', 'LoginController::index');
 $routes->get('/login', 'LoginController::index');
+$routes->post('/', 'LoginController::index');
 
-
+// ROUTE UNTUK LOGOUT
+$routes->get('/login/logout', 'LoginController::logout');
 
 
 // ROUTE UNTUK USER

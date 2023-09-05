@@ -6,16 +6,29 @@
                     Login
                 </h3>
                 <hr>
-                <form class="" action="/" method="">
+                <?php if (session()->get('success')) : ?>
+                    <div class="alert alert-success" role="alert">
+                        <?= session()->get('success') ?>
+                    </div>
+                <?php endif;  ?>
+                <form class="" action="/" method="post">
                     <div class="form-group">
-                        <label for="name">Nama Pengguna</label>
-                        <input type="text" class="form-control" name="name" id="name" value=" <?= set_value('name')  ?> ">
+                        <label for="NAMA">Nama Pengguna</label>
+                        <input type="text" class="form-control" name="NAMA" id="NAMA" value="<?= set_value('NAMA')  ?>">
                     </div>
                     <br>
                     <div class="form-group">
-                        <label for="password">Password</label>
-                        <input type="text" class="form-control" name="password" id="password" value="">
+                        <label for="PASSWORD">Password</label>
+                        <input type="password" class="form-control" name="PASSWORD" id="PASSWORD" value="">
                     </div>
+
+                    <?php if (isset($validation)) : ?>
+                        <div class="col-12">
+                            <div class="alert alert-danger" role="alert">
+                                <?= $validation->listerrors() ?>
+                            </div>
+                        </div>
+                    <?php endif; ?>
                     <br>
                     <div class="row">
                         <div class="mr-4 col-12 col-sm-4">
