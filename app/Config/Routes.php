@@ -35,3 +35,6 @@ $routes->delete('/pegawai/hapus', 'PegawaiController::hapus');
 // ROUTE UNTUK CORE
 $routes->get('/core', 'CoreController::index');
 $routes->get('/core', 'CoreController::index');
+
+// ROUTE UNTUK EXPORT
+$routes->get('pegawai/export', 'PegawaiController::export');

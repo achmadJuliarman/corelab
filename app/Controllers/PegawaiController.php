@@ -2,6 +2,9 @@
 
 namespace App\Controllers;
 
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
+
 class PegawaiController extends BaseController
 {
     public function index(): string
@@ -60,5 +63,58 @@ class PegawaiController extends BaseController
         $no = $this->request->getVar('no');
         $this->pegawaiModel->delete($no);
         return redirect()->to('pegawai/')->with('success', 'Berhasil Hapus Data Pegawai');
+    }
+
+    public function export()
+    {
+        $pegawai = $this->pegawaiModel->findAll();
+        $spreadsheet = new Spreadsheet();
+        $sheet = $spreadsheet->getActiveSheet();
+        
+        $sheet->setCellValue('A1', 'No');
+        $sheet->setCellValue('B1', 'Nama');
+        $sheet->setCellValue('C1', 'Password');
+        $sheet->setCellValue('D1', 'Nip');
+        $sheet->setCellValue('E1', 'Telp');
+        $sheet->setCellValue('F1', 'ID Level User');
+
+        $column = 2; //kolom start
+       foreach ($pegawai as $key => $value) {
+         $sheet->setCellValue('A'.$column, ($column-1));
+         $sheet->setCellValue('B'.$column, $value->NAMA);
+         $sheet->setCellValue('C'.$column, $value->PASSWORD);
+         $sheet->setCellValue('D'.$column, $value->NIP);
+         $sheet->setCellValue('E'.$column, $value->TELP);
+         $sheet->setCellValue('F'.$column, $value->USERLEVELID);
+         $column++;
+       }
+
+       $sheet->getStyle('A1:F1')->getFont()->setBold(true);
+       $sheet->getStyle('A1:F1')->getFill()
+             ->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)
+             ->getStartColor()->setARGB('FFFFFF00');
+       $styleArray = [
+            'borders' => [
+                'allBorders' =>[
+                    'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+                    'color' => ['argb' => 'FF000000'],
+                ],
+            ],
+        ];
+
+       $sheet->getStyle('A1:F'.($column-1))->applyFromArray($styleArray);
+
+       $sheet->getColumnDimension('A')->setAutoSize(true);
+       $sheet->getColumnDimension('B')->setAutoSize(true);
+       $sheet->getColumnDimension('C')->setAutoSize(true);
+       $sheet->getColumnDimension('D')->setAutoSize(true);
+       $sheet->getColumnDimension('F')->setAutoSize(true);
+
+        $writer = new Xlsx($spreadsheet);
+        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        header('Content-Disposition: attachment;filename=Data Pegawai.xlsx');
+        header('Cache-Control: max-age=0');
+        $writer->save('php://output');
+        exit();
     }
 }

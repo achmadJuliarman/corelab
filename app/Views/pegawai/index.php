@@ -26,6 +26,11 @@
     <button type="button" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#modalTambah">
       <i class="fa-solid fa-plus"></i> Tambah Pegawai
     </button>   
+
+     <a href="<?=site_url('pegawai/export')?>" class="btn btn-primary mb-3">
+      <i class="fa-solid fa-file-download"></i> Export Excel
+    </a>  
+
     <!-- END BUTTON MODAL TAMBAH -->
     <div class="card mb-4">
         <div class="card-header">
