@@ -6,13 +6,22 @@
     <ol class="breadcrumb mb-4">
         <li class="breadcrumb-item active">Pegawai</li>
     </ol>
+
     <!-- NOTIFIKASI BERHASIL -->
     <?php if(session('success')) : ?>
     <div class="alert alert-info" role="alert">
       <i class="fa-solid fa-check"></i> <b><?= session('success') ?></b>
     </div>
     <?php endif; ?>
-<!-- END NOTIFICATION -->
+    <!-- END NOTIFICATION -->
+    
+    <!-- NOTIFIKASI GAGAl -->
+    <?php if(session('validation')) : ?>
+        <div class="alert alert-danger" role="alert">
+            <i class="fa-solid fa-ban"></i> <b><?= session('validation')->listErrors() ?></b>
+        </div>
+    <?php endif; ?>
+    <!-- END NOTIFIKASI GAGAL -->
     <!-- Button trigger TAMBAH -->
     <button type="button" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#modalTambah">
       <i class="fa-solid fa-plus"></i> Tambah Pegawai
@@ -84,24 +93,24 @@
             <?= csrf_field() ?>
             <div class="mb-3">
                 <label for="nama_pegawai">Nama Pegawai</label>
-                <input type="text" name="nama" id="nama" class="form-control" required>
+                <input type="text" name="nama" id="nama" class="form-control" required value="<?= !empty(old('nama')) ? old('nama') : '' ?>">
             </div>
             <div class="mb-3">
                 <label for="password">Password</label>
-                <input type="text" name="pass" id="slug_kateogori" class="form-control" required>
+                <input type="text" name="pass" id="pass" class="form-control" required value="<?= !empty(old('pass')) ? old('pass') : '' ?>">
             </div>
             <div class="mb-3">
                 <label for="nip">NIP</label>
-                <input type="text" name="nip" id="nip" class="form-control" required>
+                <input type="text" name="nip" id="nip" class="form-control" required value="<?= !empty(old('nip')) ? old('nip') : '' ?>">
             </div>
             <div class="mb-3">
                 <label for="telp">No Telp</label>
-                <input type="text" name="telp" id="telp" class="form-control" required>
+                <input type="text" name="telp" id="telp" class="form-control" required value="<?= !empty(old('telp')) ? old('telp') : '' ?>">
             </div>
             <div class="mb-4">
                 <label for="telp">Level User</label>
-                <select class="form-select" aria-label="Default select example" id="level" name="level">
-                    <option selected disabled>-- Pilih Level User --</option>
+                <select class="form-select" aria-label="Default select example" id="level" name="level" required >
+                    <option selected disabled value="">-- Pilih Level User --</option>
                     <?php foreach($levels as $level) : ?>
                         <option value="<?= $level->id_level ?>"><?= $level->nama_level ?></option>
                     <?php endforeach; ?>
