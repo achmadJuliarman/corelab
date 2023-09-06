@@ -26,8 +26,8 @@ $routes->get('/user', 'UserController::index');
 
 // ROUTE UNTUK PEGAWAI
 $routes->get('/pegawai', 'PegawaiController::index');
-
-
+$routes->post('/pegawai/tambah', 'PegawaiController::tambah');
+$routes->delete('/pegawai/hapus', 'PegawaiController::hapus');
 
 
 

@@ -14,6 +14,7 @@ use Psr\Log\LoggerInterface;
 // use models
 use App\Models\CoreModel;
 use App\Models\PegawaiModel;
+use App\Models\UserLevelModel;
 /**
  * Class BaseController
  *
@@ -61,5 +62,6 @@ abstract class BaseController extends Controller
         // E.g.: $this->session = \Config\Services::session();
         $this->pegawaiModel = new PegawaiModel();
         $this->coreModel = new CoreModel();
+        $this->userLevelModel = new UserLevelModel();
     }
 }
