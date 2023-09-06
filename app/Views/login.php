@@ -14,12 +14,12 @@
                 <form class="" action="/" method="post">
                     <div class="form-group">
                         <label for="NAMA">Nama Pengguna</label>
-                        <input type="text" class="form-control" name="NAMA" id="NAMA" value="<?= set_value('NAMA')  ?>">
+                        <input type="text" class="form-control" name="NAMA" id="NAMA" value="<?= set_value('NAMA')  ?>" required>
                     </div>
                     <br>
                     <div class="form-group">
                         <label for="PASSWORD">Password</label>
-                        <input type="password" class="form-control" name="PASSWORD" id="PASSWORD" value="">
+                        <input type="password" class="form-control" name="PASSWORD" id="PASSWORD" value="" required>
                     </div>
 
                     <?php if (isset($validation)) : ?>

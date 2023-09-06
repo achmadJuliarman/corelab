@@ -53,36 +53,11 @@
                             Dashboard
                         </a>
                         <div class="sb-sidenav-menu-heading">Interface</div>
-                        <a class="nav-link" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
-                            <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                        <a class="nav-link <?= ($sub_menu == 'data-pegawai') ? 'active' : '' ?>" href="<?= base_url('pegawai') ?>">
                             Pegawai
-                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                         </a>
-                        <div class="collapse <?= ($title == 'Pegawai') ? 'show' : '' ?>" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
-                            <nav class="sb-sidenav-menu-nested nav">
-                                <a class="nav-link <?= ($sub_menu == 'data-pegawai') ? 'active' : '' ?>" href="<?= base_url('pegawai') ?>">Data Pegawai</a>
-                                <a class="nav-link" href="<?= basename('pegawai/tambah') ?>">Tambah Data Pegawai</a>
-                            </nav>
-                        </div>
-                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
-                            <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
+                        <a class="nav-link <?= ($sub_menu == 'data-core') ? 'active' : '' ?>" href="<?= base_url('core') ?>">
                             CORE
-                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                        </a>
-                        <div class="collapse <?= ($title == 'Core') ? 'show' : '' ?>" id="collapsePages" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
-                            <nav class="sb-sidenav-menu-nested nav">
-                                <a class="nav-link <?= ($sub_menu == 'data-core') ? 'active' : '' ?>" href="<?= base_url('core') ?>">Data CORE</a>
-                                <a class="nav-link" href="<?= base_url('core/tambah') ?>">Tambah Data CORE</a>
-                            </nav>
-                        </div>
-                        <div class="sb-sidenav-menu-heading">Addons</div>
-                        <a class="nav-link" href="charts.html">
-                            <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
-                            Charts
-                        </a>
-                        <a class="nav-link" href="tables.html">
-                            <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
-                            Tables
                         </a>
                     </div>
                 </div>
