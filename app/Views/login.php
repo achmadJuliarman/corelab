@@ -19,7 +19,7 @@
                     <br>
                     <div class="form-group">
                         <label for="PASSWORD">Password</label>
-                        <input type="text" class="form-control" name="PASSWORD" id="PASSWORD" value="" required>
+                        <input type="password" class="form-control" name="PASSWORD" id="PASSWORD" value="" required>
                     </div>
                     <br>
                     <?php if (isset($passwordError)) : ?>

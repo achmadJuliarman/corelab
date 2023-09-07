@@ -37,6 +37,14 @@ class PegawaiController extends BaseController
                     'min_length' => 'No telp Minimal 11 karakter',
                     'numeric' => 'No telp Harus Berupa Angka'
                 ]
+            ],
+            'nip' => [
+                'rules' => 'required|min_length[18]|numeric',
+                'errors' => [
+                    'required' => 'NIP Harus Diisi',
+                    'min_length' => 'NIP NIP Minimal 18 Karakter',
+                    'numeric' => 'NIP Harus Berupa Angka'
+                ]
             ]
         ]);
 
@@ -60,6 +68,37 @@ class PegawaiController extends BaseController
 
     public function ubah()
     {
+        $validInput = $this->validate([
+            'nama' => [
+                'rules' => 'required|is_unique[tbl_pegawai.NAMA]',
+                'errors' => [
+                    'required' => 'Nama Pegawai Tidak Boleh Kosong',
+                    'is_unique' => 'Nama / Username Pegawai sudah ada'
+                ]
+            ],
+            'telp' => [
+                'rules' => 'required|min_length[11]|numeric',
+                'errors' => [
+                    'required' => 'No Telp Tidak Boleh Kosong',
+                    'min_length' => 'No telp Minimal 11 karakter',
+                    'numeric' => 'No telp Harus Berupa Angka'
+                ]
+            ],
+            'nip' => [
+                'rules' => 'required|min_length[18]|numeric',
+                'errors' => [
+                    'required' => 'NIP Harus Diisi',
+                    'min_length' => 'NIP NIP Minimal 18 Karakter',
+                    'numeric' => 'NIP Harus Berupa Angka'
+                ]
+            ]
+        ]);
+
+        if(!$validInput) {
+            $validation = $this->validator;
+            return redirect()->to('pegawai')->withInput()->with('validation', $validation); // $validation ini akan digenerate sebagai data session
+        }
+
         $data = [
             'NO' => $this->request->getVar('no'),
             'NAMA' => $this->request->getVar('nama'),
