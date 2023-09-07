@@ -14,4 +14,9 @@ class CoreController extends BaseController
         // dd($data['core']);
         return view('core/index', $data);
     }
+
+    public function tambah()
+    {
+        dd($this->request->getVar());
+    }
 }

@@ -74,6 +74,107 @@
 <!-- ====================================================================== -->
 <!--                            MODAL BOX -->
 <!-- ====================================================================== -->
+<!-- MODAL TAMBAH -->
+<div class="modal fade modal-lg" id="modalTambah" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header bg-primary text-white">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">
+            <i class="fa-duotone fa-octagon-plus"></i>Tambah Data Core
+        </h1>  
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form action="<?= base_url('core/tambah') ?>" method="post" enctype="multipart/form-data">
+            <?= csrf_field() ?>
+            <div class="mb-3">
+                <label for="ship">Nama Pegawai</label>
+                <input type="text" name="ship" id="ship" class="form-control" required value="<?= !empty(old('ship')) ? old('ship') : '' ?>">
+            </div>
+            <div class="mb-3">
+                <label for="cruise">Cruise</label>
+                <input type="text" name="cruise" id="cruise" class="form-control" required value="<?= !empty(old('cruise')) ? old('cruise') : '' ?>">
+            </div>
+            <div class="mb-3">
+                <label for="sampel_num">Sampel NUM</label>
+                <input type="text" name="sampel_num" id="sampel_num" class="form-control" required value="<?= !empty(old('sampel_num')) ? old('sampel_num') : '' ?>">
+            </div>
+            <div class="mb-3">
+                <label for="device">Device</label>
+                <input type="text" name="device" id="device" class="form-control" required value="<?= !empty(old('device')) ? old('device') : '' ?>">
+            </div>
+            <div class="mb-3">
+                <label for="sum">Sum</label>
+                <input type="text" name="sum" id="sum" class="form-control" required value="<?= !empty(old('sum')) ? old('sum') : '' ?>">
+            </div>
+            <div class="date mb-3" data-provide="datepicker">
+                <label for="ship">Tanggal</label>
+                <input type="date" class="form-control" placeholder="Tanggal" name="date" required> 
+                <div class="input-group-addon">
+                    <span class=""></span>
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="depth">Depth</label>
+                <input type="text" name="depth" id="depth" class="form-control" required value="<?= !empty(old('depth')) ? old('depth') : '' ?>">
+            </div>
+            <div class="mb-3">
+                <label for="length">Length</label>
+                <input type="text" name="length" id="length" class="form-control" required value="<?= !empty(old('length')) ? old('length') : '' ?>">
+            </div>
+            <div class="mb-3">
+                <label for="location">Location</label>
+                <input type="text" name="location" id="location" class="form-control" required value="<?= !empty(old('location')) ? old('location') : '' ?>">
+            </div>
+            <div class="mb-3">
+                <label for="sed_type">SED Type</label>
+                <input type="text" name="sed_type" id="sed_type" class="form-control" required value="<?= !empty(old('sed_type')) ? old('sed_type') : '' ?>">
+            </div>
+            <div class="mb-3">  
+                <label for="storage">Storage</label>
+                <input type="text" name="storage" id="storage" class="form-control" required value="<?= !empty(old('storage')) ? old('storage') : '' ?>">
+            </div>
+            <div class="mb-3">
+                <label for="remark">Remark</label>
+                <input type="text" name="remark" id="remark" class="form-control" required value="<?= !empty(old('remark')) ? old('remark') : '' ?>">
+            </div>
+            <div class="mb-3">
+                <label for="vol">Vol</label>
+                <input type="text" name="vol" id="vol" class="form-control" required value="<?= !empty(old('vol')) ? old('vol') : '' ?>">
+            </div>
+            <div class="mb-3">
+                <label for="latitude">Latitude</label>
+                <input type="text" name="latitude" id="latitude" class="form-control" required value="<?= !empty(old('latitude')) ? old('latitude') : '' ?>">
+            </div>
+            <div class="mb-3">
+                <label for="longitude">Longitude</label>
+                <input type="text" name="longitude" id="longitude" class="form-control" required value="<?= !empty(old('longitude')) ? old('longitude') : '' ?>">
+            </div>
+            <div class="row mb-3">
+                    <label for="foto" class="col-sm-2 col-form-label">Foto Spesimen</label>
+                    <div class="input-group mb-3">
+                        <input type="file" class="form-control" id="foto" name="foto" accept=".png,.jpg,.jpeg" max-size="1">
+                        <label class="input-group-text" for="foto">Upload</label>
+                    </div>
+                    <div class="img">
+                        <img class="img-thumbnail" id="uploadedImage" src="#" alt="Gambar yang diunggah" style="width:200px;"/>
+                    </div>
+                </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Save</button>
+            </div>
+        </form>
+      </div>
+      
+    </div>
+  </div>
+</div>
+<!-- END MODAL TAMBAH -->
+
+
+
+
 <!-- MODAL HAPUS -->
 <div class="modal fade" id="modalHapus" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
