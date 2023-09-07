@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Models\PegawaiModel;
 use App\Controllers\BaseController;
+use PhpParser\Node\Stmt\Echo_;
 
 class LoginController extends BaseController
 {
@@ -16,13 +17,13 @@ class LoginController extends BaseController
         if ($this->request->getMethod() == 'post') {
 
             $rules = [
-                'NAMA' => 'required|min_length[5]|max_length[50]',
+                'NAMA' => 'required|min_length[1]|max_length[50]',
                 'PASSWORD' => 'required|min_length[6]|max_length[50]',
             ];
 
             $errors = [
                 'PASSWORD' => [
-                    'validateUser' => 'Nama dan Password don\'t match'
+                    'validateUser' => 'Nama dan Password tidak cocok'
                 ]
             ];
 
@@ -30,12 +31,17 @@ class LoginController extends BaseController
                 $data['validation'] = $this->validator;
             } else {
                 $model = new PegawaiModel();
+                // Ambil nilai 'NAMA' dari input pengguna
+                $nama = $this->request->getVar('NAMA');
+                $user = $model->where('NAMA', $nama)->first();
 
-                $user = $model->where('NAMA', $this->request->getVar('NAMA'))->first();
-
-                $this->setUserMethod($user);
-
-                return redirect()->to('pegawai');
+                // Periksa apakah kata sandi sesuai dengan yang ada di database
+                if ($this->request->getVar('PASSWORD') == $user->PASSWORD) {
+                    $this->setUserMethod($user);
+                    return redirect()->to('pegawai');
+                } else {
+                    $data['passwordError'] = 'Password salah';
+                }
             }
         }
 

@@ -19,9 +19,14 @@
                     <br>
                     <div class="form-group">
                         <label for="PASSWORD">Password</label>
-                        <input type="password" class="form-control" name="PASSWORD" id="PASSWORD" value="" required>
+                        <input type="text" class="form-control" name="PASSWORD" id="PASSWORD" value="" required>
                     </div>
-
+                    <br>
+                    <?php if (isset($passwordError)) : ?>
+                        <div class="alert alert-danger" role="alert">
+                            <?= $passwordError ?>
+                        </div>
+                    <?php endif; ?>
                     <?php if (isset($validation)) : ?>
                         <div class="col-12">
                             <div class="alert alert-danger" role="alert">

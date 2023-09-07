@@ -10,12 +10,14 @@ class UserRules
     public function validateUser(string $str, string $fields, array $data)
     {
         $model = new PegawaiModel();
-        $user = $model->where('NAMA', $data['NAMA'])
-            ->first();
 
+        [$field, $nama] = explode(',', $fields);
+        $user = $model->where('NAMA', $data['NAMA'])->first();
+
+        // $user = $model->where($field, $nama)->first();
         if (!$user)
             return false;
 
-        return password_verify($data['PASSWORD'], $user['PASSWORD']);
+        return password_verify($data['PASSWORD'], $user->PASSWORD);
     }
 }
