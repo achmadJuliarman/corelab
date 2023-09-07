@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
+use Dompdf\Dompdf;
 
 class PegawaiController extends BaseController
 {
@@ -65,7 +66,7 @@ class PegawaiController extends BaseController
         return redirect()->to('pegawai/')->with('success', 'Berhasil Hapus Data Pegawai');
     }
 
-    public function export()
+    public function exportexcel()
     {
         $pegawai = $this->pegawaiModel->findAll();
         $spreadsheet = new Spreadsheet();
@@ -79,6 +80,8 @@ class PegawaiController extends BaseController
         $sheet->setCellValue('F1', 'ID Level User');
 
         $column = 2; //kolom start
+
+        //Untuk mengatur value dalam excel
        foreach ($pegawai as $key => $value) {
          $sheet->setCellValue('A'.$column, ($column-1));
          $sheet->setCellValue('B'.$column, $value->NAMA);
@@ -88,7 +91,7 @@ class PegawaiController extends BaseController
          $sheet->setCellValue('F'.$column, $value->USERLEVELID);
          $column++;
        }
-
+        //Mengatur style yang ada
        $sheet->getStyle('A1:F1')->getFont()->setBold(true);
        $sheet->getStyle('A1:F1')->getFill()
              ->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)
@@ -104,12 +107,15 @@ class PegawaiController extends BaseController
 
        $sheet->getStyle('A1:F'.($column-1))->applyFromArray($styleArray);
 
+        //Agar Auto Size saat di export di excel
        $sheet->getColumnDimension('A')->setAutoSize(true);
        $sheet->getColumnDimension('B')->setAutoSize(true);
        $sheet->getColumnDimension('C')->setAutoSize(true);
        $sheet->getColumnDimension('D')->setAutoSize(true);
        $sheet->getColumnDimension('F')->setAutoSize(true);
 
+
+        //untuk melakukan download excel dan penamaan file nya
         $writer = new Xlsx($spreadsheet);
         header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
         header('Content-Disposition: attachment;filename=Data Pegawai.xlsx');
@@ -117,4 +123,28 @@ class PegawaiController extends BaseController
         $writer->save('php://output');
         exit();
     }
+
+    public function exportpdf()
+    {
+        $data = [
+            "pegawai" => $this->pegawaiModel->orderBy('NO', 'DESC')->findAll(),
+        ];
+
+        $view = view('pegawai/export-pegawai-pdf' , $data);
+
+        // instantiate and use the dompdf class
+        $dompdf = new Dompdf();
+        $dompdf->loadHtml($view);
+
+        // (Optional) Setup the paper size and orientation
+        $dompdf->setPaper('A4', 'potrait');
+
+        // Render the HTML as PDF
+        $dompdf->render();
+
+        // Output the generated PDF to Browser
+        $dompdf->stream("data-pegawai", array("Attachment"=>false));
+
+    }
+
 }

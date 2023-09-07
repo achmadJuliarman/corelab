@@ -37,4 +37,5 @@ $routes->get('/core', 'CoreController::index');
 $routes->get('/core', 'CoreController::index');
 
 // ROUTE UNTUK EXPORT
-$routes->get('pegawai/export', 'PegawaiController::export');
+$routes->get('pegawai/exportexcel', 'PegawaiController::exportexcel');
+$routes->get('pegawai/exportpdf' , 'PegawaiController::exportpdf');

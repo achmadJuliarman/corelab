@@ -27,8 +27,12 @@
       <i class="fa-solid fa-plus"></i> Tambah Pegawai
     </button>   
 
-     <a href="<?=site_url('pegawai/export')?>" class="btn btn-primary mb-3">
-      <i class="fa-solid fa-file-download"></i> Export Excel
+     <a href="<?=site_url('pegawai/exportexcel')?>" class="btn btn-primary mb-3">
+      <i class="fa-solid fa-file-excel"></i> Export Excel
+    </a>  
+
+    <a onclick="window.open(this.href,'_blank'); return false;" href="<?=site_url('pegawai/exportpdf')?>"    class="btn btn-warning mb-3">
+      <i class="fa-solid fa-file-pdf"></i> Export PDF
     </a>  
 
     <!-- END BUTTON MODAL TAMBAH -->
