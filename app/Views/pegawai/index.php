@@ -7,6 +7,9 @@
         <li class="breadcrumb-item active">Pegawai</li>
     </ol>
 
+<!-- ================================================================ -->
+<!--                        NOTIFICATIONS -->
+<!-- ================================================================ -->
     <!-- NOTIFIKASI BERHASIL -->
     <?php if(session('success')) : ?>
     <div class="alert alert-info" role="alert">
@@ -22,6 +25,11 @@
         </div>
     <?php endif; ?>
     <!-- END NOTIFIKASI GAGAL -->
+<!-- ================================================================ -->
+<!--                        END NOTIFICATIONS -->
+<!-- ================================================================ -->
+
+
     <!-- Button trigger TAMBAH -->
     <button type="button" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#modalTambah">
       <i class="fa-solid fa-plus"></i> Tambah Pegawai
@@ -69,7 +77,9 @@
                             <td><?= $p->TELP ?></td>
                             <td><?= $p->USERLEVELID ?></td>
                             <td>
-                                <a href="" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#modalUbah" data-nama="<?= $p->NAMA ?>" data-no="<?= $p->NO ?>" id="btn-ubah">
+                                <a href="" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#modalUbah" id="btn-ubah"
+                                 data-nama="<?= $p->NAMA ?>" data-no="<?= $p->NO ?>" 
+                                 data-nip="<?= $p->NIP ?>" data-telp="<?= $p->TELP ?>" data-level="<?= $p->USERLEVELID ?>">
                                     <l class="fas fa-edit"></l>
                                 </a>
                                 <a href="" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#modalHapus" data-nama="<?= $p->NAMA ?>" data-no="<?= $p->NO ?>" id="btn-hapus">
@@ -138,7 +148,52 @@
 <!-- END MODAL TAMBAH -->
 
 
-
+<!-- MODAL UBAH -->
+<div class="modal fade modal-lg" id="modalUbah" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header bg-success text-white">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">
+            <i class="fa-duotone fa-octagon-plus"></i>Ubah Pegawai
+        </h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form action="<?= base_url('pegawai/ubah') ?>" method="post">
+            <?= csrf_field() ?>
+            <input type="hidden" id="no" name="no">
+            <div class="mb-3">
+                <label for="nama_pegawai">Nama Pegawai</label>
+                <input type="text" name="nama" id="nama" class="form-control" required value="<?= !empty(old('nama')) ? old('nama') : '' ?>">
+            </div>
+            <div class="mb-3">
+                <label for="nip">NIP</label>
+                <input type="text" name="nip" id="nip" class="form-control" required value="<?= !empty(old('nip')) ? old('nip') : '' ?>">
+            </div>
+            <div class="mb-3">
+                <label for="telp">No Telp</label>
+                <input type="text" name="telp" id="telp" class="form-control" required value="<?= !empty(old('telp')) ? old('telp') : '' ?>">
+            </div>
+            <div class="mb-4">
+                <label for="telp">Level User</label>
+                <select class="form-select" aria-label="Default select example" id="level" name="level" required >
+                    <option selected disabled value="">-- Pilih Level User --</option>
+                    <?php foreach($levels as $level) : ?>
+                        <option value="<?= $level->id_level ?>"><?= $level->nama_level ?></option>
+                    <?php endforeach; ?>
+                </select>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-success">Update</button>
+            </div>
+        </form>
+      </div>
+      
+    </div>
+  </div>
+</div>
+<!-- END MODAL UBAH -->
 
 
 <!-- MODAL HAPUS -->
@@ -180,6 +235,24 @@
         console.log(no);
         $('#modalHapus .modal-body #no').val(no);
         $('#modalHapus .modal-body #nama_pegawai').val(nama);
+    });
+
+    $(document).on('click', '#btn-ubah', function() {
+        const no = $(this).data('no');
+        const nama = $(this).data('nama');
+        const nip = $(this).data('nip');
+        const telp = $(this).data('telp');
+        const level = $(this).data('level');
+        console.log(no);
+        console.log(nama);
+        console.log(nip);
+        console.log(telp);
+        console.log(level);
+        $('#modalUbah .modal-body #no').val(no);
+        $('#modalUbah .modal-body #nama').val(nama);
+        $('#modalUbah .modal-body #nip').val(nip);
+        $('#modalUbah .modal-body #telp').val(telp);
+        $('#modalUbah .modal-body #level').val(level);
     });
 </script>
 <?= $this->endSection() ?>

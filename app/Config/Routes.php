@@ -27,6 +27,7 @@ $routes->get('/user', 'UserController::index');
 // ROUTE UNTUK PEGAWAI
 $routes->get('/pegawai', 'PegawaiController::index');
 $routes->post('/pegawai/tambah', 'PegawaiController::tambah');
+$routes->post('/pegawai/ubah', 'PegawaiController::ubah');
 $routes->delete('/pegawai/hapus', 'PegawaiController::hapus');
 
 
@@ -35,6 +36,15 @@ $routes->delete('/pegawai/hapus', 'PegawaiController::hapus');
 // ROUTE UNTUK CORE
 $routes->get('/core', 'CoreController::index');
 $routes->get('/core', 'CoreController::index');
+
+
+
+
+
+
+
+
+
 
 // ROUTE UNTUK EXPORT
 $routes->get('pegawai/exportexcel', 'PegawaiController::exportexcel');

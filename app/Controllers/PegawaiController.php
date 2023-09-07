@@ -58,6 +58,18 @@ class PegawaiController extends BaseController
         return redirect()->to('pegawai/')->with('success', 'Berhasil Tambah Data Pegawai');
     }
 
+    public function ubah()
+    {
+        $data = [
+            'NO' => $this->request->getVar('no'),
+            'NAMA' => $this->request->getVar('nama'),
+            'NIP' => $this->request->getVar('nip'),
+            'TELP' => $this->request->getVar('telp'),
+            'USERLEVELID' => $this->request->getVar('level'),
+        ];
+        $this->pegawaiModel->update($data['NO'], $data);
+        return redirect()->to('pegawai/')->with('success', 'Berhasil Ubah Data Pegawai');
+    }
 
     public function hapus()
     {
@@ -66,6 +78,7 @@ class PegawaiController extends BaseController
         return redirect()->to('pegawai/')->with('success', 'Berhasil Hapus Data Pegawai');
     }
 
+    // METHOD - METHOD UNTUK EXPORT DATA PEGAWAI MENJADI BERBAGAI FORMAT FILE
     public function exportexcel()
     {
         $pegawai = $this->pegawaiModel->findAll();
