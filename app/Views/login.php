@@ -27,6 +27,11 @@
                             <?= $passwordError ?>
                         </div>
                     <?php endif; ?>
+                    <?php if (isset($usernameError)) : ?>
+                        <div class="alert alert-danger" role="alert">
+                            <?= $usernameError ?>
+                        </div>
+                    <?php endif; ?>
                     <?php if (isset($validation)) : ?>
                         <div class="col-12">
                             <div class="alert alert-danger" role="alert">

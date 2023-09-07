@@ -36,14 +36,19 @@ class LoginController extends BaseController
                 $user = $model->where('NAMA', $nama)->first();
 
                 // Periksa apakah kata sandi sesuai dengan yang ada di database
-                if ($this->request->getVar('PASSWORD') == $user->PASSWORD) {
+                if ($user && $this->request->getVar('PASSWORD') == $user->PASSWORD) {
                     $this->setUserMethod($user);
                     return redirect()->to('pegawai');
                 } else {
-                    $data['passwordError'] = 'Password salah';
+                    if (!$user) {
+                        $data['usernameError'] = 'Username belum ada';
+                    } else {
+                        $data['passwordError'] = 'Password salah';
+                    }
                 }
             }
         }
+
 
         echo view('templates/header', $data);
         echo view('login');
