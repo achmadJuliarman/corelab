@@ -3,7 +3,7 @@
 <?= $this->section('content') ?>
 <div class="container-fluid px-4">
 
-    <h1 class="mt-4">Core</h1>
+    <h1 class="mt-4">Data Core</h1>
     <ol class="breadcrumb mb-4">
         <li class="breadcrumb-item active">Core</li>
     </ol>
@@ -33,6 +33,15 @@
     <button type="button" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#modalTambah">
       <i class="fa-solid fa-plus"></i> Tambah Data Core
     </button>  
+
+     <a href="<?=site_url('core/exportexcel')?>" class="btn btn-primary mb-3">
+      <i class="fa-solid fa-file-excel"></i> Export Excel
+    </a>  
+
+    <a onclick="window.open(this.href,'_blank'); return false;" href="<?=site_url('core/exportpdf')?>"    class="btn btn-warning mb-3">
+      <i class="fa-solid fa-file-pdf"></i> Export PDF
+    </a>  
+
     <!-- END TRIGGER -->
     <div class="card mb-4">
             <div class="card-header">
@@ -43,6 +52,7 @@
                 <table id="datatablesSimple">
                 <thead>
                 <tr>
+                    <th>NO</th>
                     <th>SHIP</th>
                     <th>Cruies</th>
                     <th>Sampel Number</th>
@@ -56,9 +66,10 @@
                 </thead>
                 <tfoot>
                 <tr>
-                    <th>SHIP</th>
-                    <th>Cruies</th>
-                    <th>Sampel Number</th>
+                    <th>No</th>
+                    <th>Ship</th>
+                    <th>Cruise</th>
+                    <th>Sample Number</th>
                     <th>Sum</th>
                     <th>Date</th>
                     <th>Depth</th>
@@ -70,6 +81,7 @@
                 <tbody>
                 <?php foreach($core as $c) : ?>
                 <tr>
+                    <td><?= $c->No ?></td>
                     <td><?= $c->SHIP ?></td>
                     <td><?= $c->CRUISE_ ?></td>
                     <td><?= $c->SAMPEL_NUM ?></td>

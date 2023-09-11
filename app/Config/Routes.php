@@ -53,3 +53,5 @@ $routes->delete('/core/hapus', 'CoreController::hapus');
 // ROUTE UNTUK EXPORT
 $routes->get('pegawai/exportexcel', 'PegawaiController::exportexcel');
 $routes->get('pegawai/exportpdf', 'PegawaiController::exportpdf');
+$routes->get('core/exportexcel', 'CoreController::exportexcel');
+$routes->get('core/exportpdf', 'CoreController::exportpdf');

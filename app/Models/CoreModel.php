@@ -10,7 +10,7 @@ class CoreModel extends Model
     protected $primaryKey       = 'No';
     protected $useAutoIncrement = true;
     protected $returnType       = 'object';
-    protected $allowedFields    = ['SHIP','CRUISE_','SAMPEL_NUM','DEVICE','SUM','DATE','DEPTH','LENGTH','LOCATION','SED_TYPE','STORAGE','REMARK','VOL','LATITUDE','LONGITUDE','FOTO_SPESIMEN'];
+    protected $allowedFields    = ['No','SHIP','CRUISE_','SAMPEL_NUM','DEVICE','SUM','DATE','DEPTH','LENGTH','LOCATION','SED_TYPE','STORAGE','REMARK','VOL','LATITUDE','LONGITUDE','FOTO_SPESIMEN'];
 
     // Dates
     // protected $useTimestamps = false;

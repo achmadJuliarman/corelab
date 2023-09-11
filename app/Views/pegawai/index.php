@@ -71,7 +71,7 @@
                 </tfoot>
                 <tbody>
                     <?php foreach ($pegawai as $p) : ?>
-                        <tr>
+                        <tr>  
                             <td><?= $p->NAMA ?></td>
                             <td><?= $p->NIP ?></td>
                             <td><?= $p->TELP ?></td>
