@@ -35,7 +35,7 @@
       <i class="fa-solid fa-plus"></i> Tambah Pegawai
     </button>   
 
-     <a href="<?=site_url('pegawai/exportexcel')?>" class="btn btn-primary mb-3">
+    <a href="<?=site_url('pegawai/exportexcel')?>" class="btn btn-primary mb-3">
       <i class="fa-solid fa-file-excel"></i> Export Excel
     </a>  
 

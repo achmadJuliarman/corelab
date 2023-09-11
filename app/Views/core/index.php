@@ -2,10 +2,38 @@
 
 <?= $this->section('content') ?>
 <div class="container-fluid px-4">
+
     <h1 class="mt-4">Core</h1>
     <ol class="breadcrumb mb-4">
         <li class="breadcrumb-item active">Core</li>
     </ol>
+    <!-- ================================================================ -->
+    <!--                        NOTIFICATIONS -->
+    <!-- ================================================================ -->
+        <!-- NOTIFIKASI BERHASIL -->
+        <?php if(session('success')) : ?>
+        <div class="alert alert-info" role="alert">
+          <i class="fa-solid fa-check"></i> <b><?= session('success') ?></b>
+        </div>
+        <?php endif; ?>
+        <!-- END NOTIFICATION -->
+        
+        <!-- NOTIFIKASI GAGAl -->
+        <?php if(session('validation')) : ?>
+            <div class="alert alert-danger" role="alert">
+                <i class="fa-solid fa-ban"></i> <b><?= session('validation')->listErrors() ?></b>
+            </div>
+        <?php endif; ?>
+        <!-- END NOTIFIKASI GAGAL -->
+    <!-- ================================================================ -->
+    <!--                        END NOTIFICATIONS -->
+    <!-- ================================================================ -->
+
+    <!-- BUTTON TRIGGER MODAL TAMBAH -->
+    <button type="button" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#modalTambah">
+      <i class="fa-solid fa-plus"></i> Tambah Data Core
+    </button>  
+    <!-- END TRIGGER -->
     <div class="card mb-4">
             <div class="card-header">
                 <i class="fas fa-table me-1"></i>
@@ -59,7 +87,7 @@
                             <l class="fas fa-edit"></l>
                         </a>
                         <a href="" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#modalHapus" 
-                        data-sampel="<?= $c->SAMPEL_NUM ?>" data-id="<?= $c->No ?>" id="btn-hapus">
+                        data-sampel="<?= $c->SAMPEL_NUM ?>" data-no="<?= $c->No ?>" id="btn-hapus">
                             <i class="fas fa-trash-alt"></i>
                         </a>
                     </td>
@@ -105,7 +133,7 @@
             </div>
             <div class="mb-3">
                 <label for="sum">Sum</label>
-                <input type="text" name="sum" id="sum" class="form-control" required value="<?= !empty(old('sum')) ? old('sum') : '' ?>">
+                <input type="number" name="sum" id="sum" class="form-control" required value="<?= !empty(old('sum')) ? old('sum') : '' ?>">
             </div>
             <div class="date mb-3" data-provide="datepicker">
                 <label for="ship">Tanggal</label>
@@ -144,16 +172,16 @@
             </div>
             <div class="mb-3">
                 <label for="latitude">Latitude</label>
-                <input type="text" name="latitude" id="latitude" class="form-control" required value="<?= !empty(old('latitude')) ? old('latitude') : '' ?>">
+                <input type="number" name="latitude" id="latitude" class="form-control" required value="<?= !empty(old('latitude')) ? old('latitude') : '' ?>">
             </div>
             <div class="mb-3">
                 <label for="longitude">Longitude</label>
-                <input type="text" name="longitude" id="longitude" class="form-control" required value="<?= !empty(old('longitude')) ? old('longitude') : '' ?>">
+                <input type="number" name="longitude" id="longitude" class="form-control" required value="<?= !empty(old('longitude')) ? old('longitude') : '' ?>">
             </div>
             <div class="row mb-3">
                     <label for="foto" class="col-sm-2 col-form-label">Foto Spesimen</label>
                     <div class="input-group mb-3">
-                        <input type="file" class="form-control" id="foto" name="foto" accept=".png,.jpg,.jpeg" max-size="1">
+                        <input type="file" class="form-control" id="foto" name="foto" accept=".png,.jpg,.jpeg">
                         <label class="input-group-text" for="foto">Upload</label>
                     </div>
                     <div class="img">
@@ -186,7 +214,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <form action="<?= base_url('pegawai/hapus') ?>" method="post">
+        <form action="<?= base_url('core/hapus') ?>" method="post">
             <?= csrf_field() ?>
             <div class="mb-3">
                 <input type="hidden" name="_method" value="DELETE">
@@ -208,6 +236,7 @@
 
 
 <script>
+    // modal box hapus
     $(document).on('click', '#btn-hapus', function(){
         const no = $(this).data('no');
         const sampel = $(this).data('sampel');
@@ -215,5 +244,24 @@
         $('#modalHapus .modal-body #no').val(no);
         $('#modalHapus .modal-body #sampel_num').val(sampel);
     });
+
+    // menampilkan file yang dipilih untuk diupload
+    document.getElementById('foto').addEventListener('change', function(event) {
+        const file = event.target.files[0];
+        const image = document.getElementById('uploadedImage');
+
+        // Validasi bahwa file yang diunggah adalah gambar
+        if (file.type.startsWith('image/')) {
+            const reader = new FileReader();
+
+            reader.onload = function() {
+                image.src = reader.result;
+            };
+
+            reader.readAsDataURL(file);
+        } else {
+            alert('Harap unggah file gambar!');
+        }
+    }); 
 </script>
 <?= $this->endSection() ?>
