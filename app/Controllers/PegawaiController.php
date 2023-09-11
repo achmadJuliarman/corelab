@@ -189,7 +189,7 @@ class PegawaiController extends BaseController
         $dompdf->loadHtml($view);
 
         // (Optional) Setup the paper size and orientation
-        $dompdf->setPaper('A4', 'potrait');
+        $dompdf->setPaper('A4', 'portrait');
 
         // Render the HTML as PDF
         $dompdf->render();

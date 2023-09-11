@@ -1,14 +1,10 @@
-<?= $this->extend('layouts/template.php') ?>
-
-<?= $this->section('content') ?>
-
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<style>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Data Pegawai</title>
+  <style>
 		.border-table{
 			font-family: Arial, Helvetica, sans-serif;
 			width: 100%;
@@ -24,12 +20,29 @@
 		}
 
 		.border-table td{
-			border: 1 solid #000;
+			border: 1 solid #000; 
 		}
 	</style>
 </head>
 <body>
-	<table align="center" class="border-table">
+  <img src="assets/img/esdm.png" style="position: absolute; width: 60px; height: auto;"> 
+  <table style="width: 100%;">
+    <tr>
+     <td align="center">
+			<span style="line-height: 1	.6; font-weight: bolder;">
+				KEMENTRIAN ENERGI DAN SUMBER DAYA MINERAL <br>
+				BALAI BESAR SURVEI DAN PEMETAAN GEOLOGI KELAUTAN
+			</span>
+      </td>
+    </tr>
+  </table>
+
+  <hr class="line-title"> 
+  <p align="center">
+    LAPORAN DATA PEGAWAI <br>
+  </p>
+
+  <table align="center" class="border-table">
                 <thead>
                     <tr>
                         <th>Nama</th>
@@ -50,5 +63,5 @@
                     <?php endforeach; ?>
                 </tbody>
             </table>
+
 </body>
-</html>
