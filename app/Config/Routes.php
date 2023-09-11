@@ -36,6 +36,7 @@ $routes->delete('/pegawai/hapus', 'PegawaiController::hapus');
 
 
 // ROUTE UNTUK CORE
+$routes->get('/core', 'CoreController::index', ['filter' => 'stayLogin']);
 $routes->get('/core', 'CoreController::index');
 $routes->post('/core/tambah', 'CoreController::tambah');
 $routes->delete('/core/hapus', 'CoreController::hapus');
