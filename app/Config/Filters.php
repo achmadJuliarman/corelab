@@ -2,6 +2,7 @@
 
 namespace Config;
 
+use App\Filters\KhususAdmin;
 use CodeIgniter\Config\BaseConfig;
 use CodeIgniter\Filters\CSRF;
 use CodeIgniter\Filters\DebugToolbar;
@@ -22,6 +23,8 @@ class Filters extends BaseConfig
         'csrf'          => CSRF::class,
         'toolbar'       => DebugToolbar::class,
         'honeypot'      => Honeypot::class,
+        'stayLogin'     => \App\Filters\StayLogin::class,
+        'stayPegawai'   => \App\Filters\StayPegawai::class,
         'invalidchars'  => InvalidChars::class,
         'secureheaders' => SecureHeaders::class,
     ];

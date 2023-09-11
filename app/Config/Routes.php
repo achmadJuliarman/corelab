@@ -7,6 +7,7 @@ use CodeIgniter\Router\RouteCollection;
  */
 
 // ROUTE UNTUK LOGIN
+$routes->get('/login', 'LoginController::index', ['filter' => 'stayPegawai']);
 $routes->get('/', 'LoginController::index');
 $routes->get('/login', 'LoginController::index');
 $routes->post('/', 'LoginController::index');
@@ -25,6 +26,7 @@ $routes->get('/user', 'UserController::index');
 
 
 // ROUTE UNTUK PEGAWAI
+$routes->get('/pegawai', 'PegawaiController::index', ['filter' => 'stayLogin']);
 $routes->get('/pegawai', 'PegawaiController::index');
 $routes->post('/pegawai/tambah', 'PegawaiController::tambah');
 $routes->post('/pegawai/ubah', 'PegawaiController::ubah');
@@ -49,4 +51,4 @@ $routes->delete('/core/hapus', 'CoreController::hapus');
 
 // ROUTE UNTUK EXPORT
 $routes->get('pegawai/exportexcel', 'PegawaiController::exportexcel');
-$routes->get('pegawai/exportpdf' , 'PegawaiController::exportpdf');
+$routes->get('pegawai/exportpdf', 'PegawaiController::exportpdf');
