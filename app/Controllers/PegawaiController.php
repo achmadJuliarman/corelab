@@ -180,7 +180,7 @@ class PegawaiController extends BaseController
     {
 
         $data = [
-            "pegawai" => $this->pegawaiModel->orderBy('NO', 'DESC')->findAll(),
+            "pegawai" => $this->pegawaiModel->orderBy('NO', 'ASCE')->findAll(),
         ];
 
         $view = view('pegawai/export-pegawai-pdf' , $data);

@@ -10,7 +10,7 @@ class PegawaiModel extends Model
     protected $primaryKey       = 'NO';
     protected $useAutoIncrement = true;
     protected $returnType       = 'object';
-    protected $allowedFields    = ['NAMA', 'PASSWORD', 'NIP', 'TELP', 'USERLEVELID'];
+    protected $allowedFields    = ['NO', 'NAMA', 'PASSWORD', 'NIP', 'TELP', 'USERLEVELID'];
 
     // Dates
     // protected $useTimestamps = false;

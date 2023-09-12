@@ -22,16 +22,22 @@
 		.border-table td{
 			border: 1 solid #000; 
 		}
+
+    .header-font{
+      font-size: 16px;
+    }
 	</style>
 </head>
 <body>
-  <img src="https://i.ibb.co/3yRgLHv/esdm.png" alt="esdm" border="0" style="position: absolute; width: 60px; height: auto;">
-  <table style="width: 100%;">
+  <img src="https://i.ibb.co/3yRgLHv/esdm.png" alt="esdm" border="0" style="position: absolute; width: 75px; height: auto; margin-top: 5px;">
+  <!-- <img src="https://i.ibb.co/5B9Twbt/logo.png" alt="logo" border="0" style="position: absolute; width: 56px; height: auto; margin-left: 65px; margin-top: 50;"> -->
+  <table style="width: 100%;" class="header-font">
     <tr>
      <td align="center">
 			<span style="line-height: 1	.6; font-weight: bolder;">
-				BADAN GEOLOGI <br>
-				BALAI BESAR SURVEI DAN PEMETAAN GEOLOGI KELAUTAN
+				KEMENTRIAN ENERGI DAN SUMBER DAYA MINERAL <br>
+        BADAN GEOLOGI <br>
+				BALAI BESAR SURVEI DAN PEMETAAN GEOLOGI KELAUTAN </h3>
 			</span>
       </td>
     </tr>
@@ -40,6 +46,7 @@
   <hr class="line-title"> 
   <p align="center">
     LAPORAN DATA CORE <br>
+    Tanggal  <?php echo DATE("d-m-Y"); ?> 
   </p>
 
   <table align="center" class="border-table">
