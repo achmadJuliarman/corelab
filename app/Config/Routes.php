@@ -39,6 +39,7 @@ $routes->delete('/pegawai/hapus', 'PegawaiController::hapus');
 $routes->get('/core', 'CoreController::index', ['filter' => 'stayLogin']);
 $routes->get('/core', 'CoreController::index');
 $routes->post('/core/tambah', 'CoreController::tambah');
+$routes->post('/core/edit', 'CoreController::edit');
 $routes->delete('/core/hapus', 'CoreController::hapus');
 
 

@@ -56,6 +56,51 @@ class CoreController extends BaseController
         return redirect()->to('core/')->with('success', 'Berhasil Tambah Data CORE');
     }
 
+    public function edit()
+    {
+        // cek apakah foto baru ada ?
+        if(!empty($this->request->getFile('foto'))){
+            // ambil file foto spesimen
+            $fotoSpesimen = $this->request->getFile('foto');
+            $fotoName = $fotoSpesimen->getRandomName();
+            $fotoSpesimen->move(ROOTPATH . 'public/assets/img', $fotoName);
+
+            // hapus foto lama
+            // cari gambar berdasarkan id
+            $no = $this->request->getVar('no'); 
+            $foto_lama = $this->coreModel->find($no);
+
+            // hapus gambar 
+            if ($foto_lama != 'default.png') {
+                unlink('assets/img/'.$foto_lama->FOTO_SPESIMEN);
+            }
+        }else{
+            $fotoName = $this->request->getVar('foto-lama');
+        }
+
+        $no = $this->request->getVar('no');
+        $data = [
+            'SHIP' => $this->request->getVar('ship'),
+            'CRUISE_' => $this->request->getVar('cruise'),
+            'SAMPEL_NUM' => $this->request->getVar('sampel_num'),
+            'DEVICE' => $this->request->getVar('device'),
+            'SUM' => $this->request->getVar('sum'),
+            'DATE' => $this->request->getVar('date'),
+            'DEPTH' => $this->request->getVar('depth'),
+            'LENGTH' => $this->request->getVar('length'),
+            'LOCATION' => $this->request->getVar('location'),
+            'SED_TYPE' => $this->request->getVar('sed_type'),
+            'STORAGE' => $this->request->getVar('storage'),
+            'REMARK' => $this->request->getVar('remark'),
+            'VOL' => $this->request->getVar('vol'),
+            'LATITUDE' => $this->request->getVar('latitude'),
+            'LONGITUDE' => $this->request->getVar('longitude'),
+            'FOTO_SPESIMEN' => $fotoName
+        ];
+
+        $this->coreModel->update($no, $data);
+        return redirect()->to('core/')->with('success', 'Berhasil Edit Data CORE');
+    }
 
     public function hapus()
     {
