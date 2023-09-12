@@ -178,6 +178,7 @@ class PegawaiController extends BaseController
 
     public function exportpdf()
     {
+
         $data = [
             "pegawai" => $this->pegawaiModel->orderBy('NO', 'DESC')->findAll(),
         ];
@@ -185,7 +186,9 @@ class PegawaiController extends BaseController
         $view = view('pegawai/export-pegawai-pdf' , $data);
 
         // instantiate and use the dompdf class
-        $dompdf = new Dompdf();
+       
+        $dompdf = new Dompdf;
+        $dompdf->set_option("enable_remote", true);
         $dompdf->loadHtml($view);
 
         // (Optional) Setup the paper size and orientation

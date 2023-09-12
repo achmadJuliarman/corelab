@@ -148,6 +148,7 @@ class CoreController extends BaseController
 
         // instantiate and use the dompdf class
         $dompdf = new Dompdf();
+        $dompdf->set_option("enable_remote", true);
         $dompdf->loadHtml($view);
 
         // (Optional) Setup the paper size and orientation

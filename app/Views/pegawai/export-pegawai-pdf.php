@@ -25,12 +25,12 @@
 	</style>
 </head>
 <body>
-  <img src="assets/img/esdm.png" style="position: absolute; width: 60px; height: auto;"> 
+   <img src="https://i.ibb.co/3yRgLHv/esdm.png" alt="esdm" border="0" style="position: absolute; width: 60px; height: auto;">
   <table style="width: 100%;">
     <tr>
      <td align="center">
 			<span style="line-height: 1	.6; font-weight: bolder;">
-				KEMENTRIAN ENERGI DAN SUMBER DAYA MINERAL <br>
+				BADAN GEOLOGI <br>
 				BALAI BESAR SURVEI DAN PEMETAAN GEOLOGI KELAUTAN
 			</span>
       </td>
