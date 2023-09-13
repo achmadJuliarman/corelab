@@ -91,7 +91,14 @@
                     <td><?= $c->LENGTH ?></td>
                     <td><?= $c->LOCATION ?></td>
                     <td>
-                        <a href="<?= base_url('core/detail') ?>" class="btn btn-outline-primary btn-sm">
+                        <a href="#" class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#modalDetail"
+                        data-sampel="<?= $c->SAMPEL_NUM ?>" data-no="<?= $c->No ?>" data-ship="<?= $c->SHIP ?>"
+                        data-cruise="<?= $c->CRUISE_ ?>" data-device="<?= $c->DEVICE ?>" data-sum="<?= $c->SUM ?>"
+                        data-date="<?= $c->DATE ?>" data-depth="<?= $c->DEPTH ?>" data-length="<?= $c->LENGTH ?>"
+                        data-location="<?= $c->LOCATION ?>" data-sed="<?= $c->SED_TYPE ?>" data-storage="<?= $c->STORAGE ?>"
+                        data-remark="<?= $c->REMARK ?>" data-vol="<?= $c->VOL ?>" data-latitude="<?= $c->LATITUDE ?>"
+                        data-longitude="<?= $c->LONGITUDE ?>" data-foto="<?= $c->FOTO_SPESIMEN ?>" 
+                        id="btn-detail">
                             <i class="fa-solid fa-eye"></i>
                         </a>
                         <a href="" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#modalUbah" 
@@ -324,8 +331,6 @@
 </div>
 <!-- END MODAL EDIT -->
 
-
-
 <!-- MODAL HAPUS -->
 <div class="modal fade" id="modalHapus" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
@@ -357,6 +362,45 @@
 </div>
 <!-- END MODAL HAPUS -->
 
+
+<!-- MODAL BOX DETAIL -->
+<div class="modal fade modal-xl" id="modalDetail" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header bg-info text-white">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">
+                Detail Data 
+            </h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <div class="container d-flex justify-content-center mb-3">
+                <img src="https://i.ibb.co/3yRgLHv/esdm.png" alt="" align="center" id="foto">
+            </div>
+            <div>
+                <h4><span class="badge text-bg-info" id="date"></span></h4>
+                <ul class="list-group">
+                    <li class="list-group-item"><h3 id="sampel_num"></h3></li>
+                    <li class="list-group-item" id="ship"></li>
+                    <li class="list-group-item" id="cruise"></li>
+                    <li class="list-group-item" id="device"></li>
+                    <li class="list-group-item" id="depth"></li>
+                    <li class="list-group-item" id="length"></li>
+                    <li class="list-group-item" id="location"></li>
+                    <li class="list-group-item" id="sed_type"></li>
+                    <li class="list-group-item" id="storage"></li>
+                    <li class="list-group-item" id="remark"></li>
+                    <li class="list-group-item" id="vol"></li>
+                    <li class="list-group-item" id="latitude"></li>
+                    <li class="list-group-item" id="longitude"></li>
+                </ul>
+            </div>
+        </div>
+      
+    </div>
+  </div>
+</div>
+<!-- END MODAL BOX DETAIL -->
 
 <script>
     // modal box hapus
@@ -408,6 +452,45 @@
         $('#modalUbah .modal-body #longitude').val(longitude);
         $('#modalUbah .modal-body #img-lama').attr('src','<?= base_url() ?>assets/img/'+foto);
         $('#modalUbah .modal-body #foto-lama').val(foto);
+    });
+
+    // modal box detail
+    $(document).on('click', '#btn-detail', function(){
+        const no = $(this).data('no');
+        const ship = $(this).data('ship');
+        const sampel = $(this).data('sampel');
+        const cruise = $(this).data('cruise');
+        const device = $(this).data('device');
+        const sum = $(this).data('sum');
+        const date = $(this).data('date');
+        const depth = $(this).data('depth');
+        const length = $(this).data('length');
+        const location = $(this).data('location');
+        const sed = $(this).data('sed');
+        const storage = $(this).data('storage');
+        const remark = $(this).data('remark');
+        const vol = $(this).data('vol');
+        const longitude = $(this).data('longitude');
+        const latitude = $(this).data('latitude');
+        const foto = $(this).data('foto');
+
+        console.log(sampel);
+        $('#modalDetail .modal-body #no').html(no);
+        $('#modalDetail .modal-body #ship').html('<b>Ship : </b>'+ship);
+        $('#modalDetail .modal-body #cruise').html('<b>Cruise : </b>'+cruise);
+        $('#modalDetail .modal-body #sampel_num').html('<b>Sampel Num : </b>'+sampel);
+        $('#modalDetail .modal-body #device').html('<b>Device : </b>'+device);
+        $('#modalDetail .modal-body #date').html(date);
+        $('#modalDetail .modal-body #depth').html('<b>Depth : </b>'+depth);
+        $('#modalDetail .modal-body #length').html('<b>Length : </b>'+length);
+        $('#modalDetail .modal-body #location').html('<b>Location : </b>'+location);
+        $('#modalDetail .modal-body #sed_type').html('<b>SED Type : </b>'+sed);
+        $('#modalDetail .modal-body #storage').html('<b>Storage : </b>'+storage);
+        $('#modalDetail .modal-body #remark').html('<b>Remark : </b>'+remark);
+        $('#modalDetail .modal-body #vol').html('<b>Vol : </b>'+vol);
+        $('#modalDetail .modal-body #latitude').html('<b>Latitude : </b>'+latitude);
+        $('#modalDetail .modal-body #longitude').html('<b>Longitude : </b>'+longitude);
+        $('#modalDetail .modal-body #foto').attr('src','<?= base_url() ?>assets/img/'+foto);
     });
 
 
