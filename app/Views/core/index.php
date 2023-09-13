@@ -56,7 +56,6 @@
                     <th>SHIP</th>
                     <th>Cruies</th>
                     <th>Sampel Number</th>
-                    <th>Sum</th>
                     <th>Date</th>
                     <th>Depth</th>
                     <th>Length</th>
@@ -70,7 +69,6 @@
                     <th>Ship</th>
                     <th>Cruise</th>
                     <th>Sample Number</th>
-                    <th>Sum</th>
                     <th>Date</th>
                     <th>Depth</th>
                     <th>Length</th>
@@ -85,7 +83,6 @@
                     <td><?= $c->SHIP ?></td>
                     <td><?= $c->CRUISE_ ?></td>
                     <td><?= $c->SAMPEL_NUM ?></td>
-                    <td><?= $c->SUM ?></td>
                     <td><?= $c->DATE ?></td>
                     <td><?= $c->DEPTH ?></td>   
                     <td><?= $c->LENGTH ?></td>
