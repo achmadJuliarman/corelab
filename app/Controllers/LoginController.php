@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Models\PegawaiModel;
+use App\Models\UserLevelModelModel;
 use App\Controllers\BaseController;
 use PhpParser\Node\Stmt\Echo_;
 
@@ -38,7 +39,20 @@ class LoginController extends BaseController
                 // Periksa apakah kata sandi sesuai dengan yang ada di database
                 if ($user && $this->request->getVar('PASSWORD') == $user->PASSWORD) {
                     $this->setUserMethod($user);
-                    return redirect()->to('pegawai');
+                    // return redirect()->to('pegawai');
+                    $id_level = $user->ID_LEVEL;
+
+                    switch ($id_level) {
+                        case 1:
+                            return redirect()->to('/pegawai');
+                        case 2:
+                            return redirect()->to('/dashboard');
+                        case 3:
+                            return redirect()->to('/core');
+                        default:
+                            // Tindakan default jika tidak ada level yang cocok
+                            break;
+                    }
                 } else {
                     if (!$user) {
                         $data['usernameError'] = 'Username belum ada';

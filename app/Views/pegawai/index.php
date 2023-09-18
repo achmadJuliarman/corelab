@@ -7,41 +7,41 @@
         <li class="breadcrumb-item active">Pegawai</li>
     </ol>
 
-<!-- ================================================================ -->
-<!--                        NOTIFICATIONS -->
-<!-- ================================================================ -->
+    <!-- ================================================================ -->
+    <!--                        NOTIFICATIONS -->
+    <!-- ================================================================ -->
     <!-- NOTIFIKASI BERHASIL -->
-    <?php if(session('success')) : ?>
-    <div class="alert alert-info" role="alert">
-      <i class="fa-solid fa-check"></i> <b><?= session('success') ?></b>
-    </div>
+    <?php if (session('success')) : ?>
+        <div class="alert alert-info" role="alert">
+            <i class="fa-solid fa-check"></i> <b><?= session('success') ?></b>
+        </div>
     <?php endif; ?>
     <!-- END NOTIFICATION -->
-    
+
     <!-- NOTIFIKASI GAGAl -->
-    <?php if(session('validation')) : ?>
+    <?php if (session('validation')) : ?>
         <div class="alert alert-danger" role="alert">
             <i class="fa-solid fa-ban"></i> <b><?= session('validation')->listErrors() ?></b>
         </div>
     <?php endif; ?>
     <!-- END NOTIFIKASI GAGAL -->
-<!-- ================================================================ -->
-<!--                        END NOTIFICATIONS -->
-<!-- ================================================================ -->
+    <!-- ================================================================ -->
+    <!--                        END NOTIFICATIONS -->
+    <!-- ================================================================ -->
 
 
     <!-- Button trigger TAMBAH -->
     <button type="button" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#modalTambah">
-      <i class="fa-solid fa-plus"></i> Tambah Pegawai
-    </button>   
+        <i class="fa-solid fa-plus"></i> Tambah Pegawai
+    </button>
 
-    <a href="<?=site_url('pegawai/exportexcel')?>" class="btn btn-primary mb-3">
-      <i class="fa-solid fa-file-excel"></i> Export Excel
-    </a>  
+    <a href="<?= site_url('pegawai/exportexcel') ?>" class="btn btn-primary mb-3">
+        <i class="fa-solid fa-file-excel"></i> Export Excel
+    </a>
 
-    <a onclick="window.open(this.href,'_blank'); return false;" href="<?=site_url('pegawai/exportpdf')?>"    class="btn btn-warning mb-3">
-      <i class="fa-solid fa-file-pdf"></i> Export PDF
-    </a>  
+    <a onclick="window.open(this.href,'_blank'); return false;" href="<?= site_url('pegawai/exportpdf') ?>" class="btn btn-warning mb-3">
+        <i class="fa-solid fa-file-pdf"></i> Export PDF
+    </a>
 
 
 
@@ -73,15 +73,13 @@
                 </tfoot>
                 <tbody>
                     <?php foreach ($pegawai as $p) : ?>
-                        <tr>  
+                        <tr>
                             <td><?= $p->NAMA ?></td>
                             <td><?= $p->NIP ?></td>
                             <td><?= $p->TELP ?></td>
-                            <td><?= $p->USERLEVELID ?></td>
+                            <td><?= $p->ID_LEVEL ?></td>
                             <td>
-                                <a href="" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#modalUbah" id="btn-ubah"
-                                 data-nama="<?= $p->NAMA ?>" data-no="<?= $p->NO ?>" 
-                                 data-nip="<?= $p->NIP ?>" data-telp="<?= $p->TELP ?>" data-level="<?= $p->USERLEVELID ?>">
+                                <a href="" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#modalUbah" id="btn-ubah" data-nama="<?= $p->NAMA ?>" data-no="<?= $p->NO ?>" data-nip="<?= $p->NIP ?>" data-telp="<?= $p->TELP ?>" data-level="<?= $p->ID_LEVEL ?>">
                                     <l class="fas fa-edit"></l>
                                 </a>
                                 <a href="" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#modalHapus" data-nama="<?= $p->NAMA ?>" data-no="<?= $p->NO ?>" id="btn-hapus">
@@ -101,99 +99,99 @@
 <!-- ====================================================================== -->
 <!-- MODAL TAMBAH -->
 <div class="modal fade modal-lg" id="modalTambah" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header bg-primary text-white">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">
-            <i class="fa-duotone fa-octagon-plus"></i>Tambah Pegawai
-        </h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <form action="<?= base_url('pegawai/tambah') ?>" method="post">
-            <?= csrf_field() ?>
-            <div class="mb-3">
-                <label for="nama_pegawai">Nama Pegawai</label>
-                <input type="text" name="nama" id="nama" class="form-control" required value="<?= !empty(old('nama')) ? old('nama') : '' ?>">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-primary text-white">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">
+                    <i class="fa-duotone fa-octagon-plus"></i>Tambah Pegawai
+                </h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="mb-3">
-                <label for="password">Password</label>
-                <input type="text" name="pass" id="pass" class="form-control" required value="<?= !empty(old('pass')) ? old('pass') : '' ?>">
+            <div class="modal-body">
+                <form action="<?= base_url('pegawai/tambah') ?>" method="post">
+                    <?= csrf_field() ?>
+                    <div class="mb-3">
+                        <label for="nama_pegawai">Nama Pegawai</label>
+                        <input type="text" name="nama" id="nama" class="form-control" required value="<?= !empty(old('nama')) ? old('nama') : '' ?>">
+                    </div>
+                    <div class="mb-3">
+                        <label for="password">Password</label>
+                        <input type="text" name="pass" id="pass" class="form-control" required value="<?= !empty(old('pass')) ? old('pass') : '' ?>">
+                    </div>
+                    <div class="mb-3">
+                        <label for="nip">NIP</label>
+                        <input type="text" name="nip" id="nip" class="form-control" required value="<?= !empty(old('nip')) ? old('nip') : '' ?>">
+                    </div>
+                    <div class="mb-3">
+                        <label for="telp">No Telp</label>
+                        <input type="text" name="telp" id="telp" class="form-control" required value="<?= !empty(old('telp')) ? old('telp') : '' ?>">
+                    </div>
+                    <div class="mb-4">
+                        <label for="telp">Level User</label>
+                        <select class="form-select" aria-label="Default select example" id="level" name="level" required>
+                            <option selected disabled value="">-- Pilih Level User --</option>
+                            <?php foreach ($levels as $level) : ?>
+                                <option value="<?= $level->id_level ?>"><?= $level->nama_level ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Save</button>
+                    </div>
+                </form>
             </div>
-            <div class="mb-3">
-                <label for="nip">NIP</label>
-                <input type="text" name="nip" id="nip" class="form-control" required value="<?= !empty(old('nip')) ? old('nip') : '' ?>">
-            </div>
-            <div class="mb-3">
-                <label for="telp">No Telp</label>
-                <input type="text" name="telp" id="telp" class="form-control" required value="<?= !empty(old('telp')) ? old('telp') : '' ?>">
-            </div>
-            <div class="mb-4">
-                <label for="telp">Level User</label>
-                <select class="form-select" aria-label="Default select example" id="level" name="level" required >
-                    <option selected disabled value="">-- Pilih Level User --</option>
-                    <?php foreach($levels as $level) : ?>
-                        <option value="<?= $level->id_level ?>"><?= $level->nama_level ?></option>
-                    <?php endforeach; ?>
-                </select>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary">Save</button>
-            </div>
-        </form>
-      </div>
-      
+
+        </div>
     </div>
-  </div>
 </div>
 <!-- END MODAL TAMBAH -->
 
 
 <!-- MODAL UBAH -->
 <div class="modal fade modal-lg" id="modalUbah" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header bg-success text-white">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">
-            <i class="fa-duotone fa-octagon-plus"></i>Ubah Pegawai
-        </h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <form action="<?= base_url('pegawai/ubah') ?>" method="post">
-            <?= csrf_field() ?>
-            <input type="hidden" id="no" name="no">
-            <div class="mb-3">
-                <label for="nama_pegawai">Nama Pegawai</label>
-                <input type="text" name="nama" id="nama" class="form-control" required value="<?= !empty(old('nama')) ? old('nama') : '' ?>">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-success text-white">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">
+                    <i class="fa-duotone fa-octagon-plus"></i>Ubah Pegawai
+                </h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="mb-3">
-                <label for="nip">NIP</label>
-                <input type="text" name="nip" id="nip" class="form-control" required value="<?= !empty(old('nip')) ? old('nip') : '' ?>">
+            <div class="modal-body">
+                <form action="<?= base_url('pegawai/ubah') ?>" method="post">
+                    <?= csrf_field() ?>
+                    <input type="hidden" id="no" name="no">
+                    <div class="mb-3">
+                        <label for="nama_pegawai">Nama Pegawai</label>
+                        <input type="text" name="nama" id="nama" class="form-control" required value="<?= !empty(old('nama')) ? old('nama') : '' ?>">
+                    </div>
+                    <div class="mb-3">
+                        <label for="nip">NIP</label>
+                        <input type="text" name="nip" id="nip" class="form-control" required value="<?= !empty(old('nip')) ? old('nip') : '' ?>">
+                    </div>
+                    <div class="mb-3">
+                        <label for="telp">No Telp</label>
+                        <input type="text" name="telp" id="telp" class="form-control" required value="<?= !empty(old('telp')) ? old('telp') : '' ?>">
+                    </div>
+                    <div class="mb-4">
+                        <label for="telp">Level User</label>
+                        <select class="form-select" aria-label="Default select example" id="level" name="level" required>
+                            <option selected disabled value="">-- Pilih Level User --</option>
+                            <?php foreach ($levels as $level) : ?>
+                                <option value="<?= $level->id_level ?>"><?= $level->nama_level ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-success">Update</button>
+                    </div>
+                </form>
             </div>
-            <div class="mb-3">
-                <label for="telp">No Telp</label>
-                <input type="text" name="telp" id="telp" class="form-control" required value="<?= !empty(old('telp')) ? old('telp') : '' ?>">
-            </div>
-            <div class="mb-4">
-                <label for="telp">Level User</label>
-                <select class="form-select" aria-label="Default select example" id="level" name="level" required >
-                    <option selected disabled value="">-- Pilih Level User --</option>
-                    <?php foreach($levels as $level) : ?>
-                        <option value="<?= $level->id_level ?>"><?= $level->nama_level ?></option>
-                    <?php endforeach; ?>
-                </select>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-success">Update</button>
-            </div>
-        </form>
-      </div>
-      
+
+        </div>
     </div>
-  </div>
 </div>
 <!-- END MODAL UBAH -->
 
