@@ -14,7 +14,7 @@ var ctx = document.getElementById("myBarChart");
 var myLineChart = new Chart(ctx, {
   type: 'bar',
   data: {
-    labels: ["0 - 2200", "2201 - 4400", "4401 - 6600", "6601 - 8800", "8801 - 11100"],
+    labels: ["0 - 1000", "1001 - 4400", "4401 - 6600", "6601 - 8800", "8801 - 11100"],
     datasets: [{
       label: "Depth",
       backgroundColor: "rgba(255, 165, 0)",
