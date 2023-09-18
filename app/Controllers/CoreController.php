@@ -59,7 +59,7 @@ class CoreController extends BaseController
     public function edit()
     {
         // cek apakah foto baru ada ?
-        if(!empty($this->request->getFile('foto'))){
+        if($this->request->getFile('foto')->getError() !== 4){
             // ambil file foto spesimen
             $fotoSpesimen = $this->request->getFile('foto');
             $fotoName = $fotoSpesimen->getRandomName();
@@ -70,6 +70,7 @@ class CoreController extends BaseController
             $no = $this->request->getVar('no'); 
             $foto_lama = $this->coreModel->find($no);
 
+            dd('gambar ada');
             // hapus gambar 
             if ($foto_lama != 'default.png') {
                 unlink('assets/img/'.$foto_lama->FOTO_SPESIMEN);

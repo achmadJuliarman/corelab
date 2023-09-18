@@ -194,11 +194,11 @@
             </div>
             <div class="mb-3">
                 <label for="latitude">Latitude</label>
-                <input type="number" name="latitude" id="latitude" class="form-control" required value="<?= !empty(old('latitude')) ? old('latitude') : '' ?>">
+                <input type="text" name="latitude" id="latitude" class="form-control" required value="<?= !empty(old('latitude')) ? old('latitude') : '' ?>">
             </div>
             <div class="mb-3">
                 <label for="longitude">Longitude</label>
-                <input type="number" name="longitude" id="longitude" class="form-control" required value="<?= !empty(old('longitude')) ? old('longitude') : '' ?>">
+                <input type="text" name="longitude" id="longitude" class="form-control" required value="<?= !empty(old('longitude')) ? old('longitude') : '' ?>">
             </div>
             <div class="row mb-3">
                     <label for="foto" class="col-sm-2 col-form-label">Foto Spesimen</label>
@@ -293,11 +293,11 @@
             </div>
             <div class="mb-3">
                 <label for="latitude">Latitude</label>
-                <input type="number" name="latitude" id="latitude" class="form-control" required value="<?= !empty(old('latitude')) ? old('latitude') : '' ?>">
+                <input type="text" name="latitude" id="latitude" class="form-control" required value="<?= !empty(old('latitude')) ? old('latitude') : '' ?>">
             </div>
             <div class="mb-3">
                 <label for="longitude">Longitude</label>
-                <input type="number" name="longitude" id="longitude" class="form-control" required value="<?= !empty(old('longitude')) ? old('longitude') : '' ?>">
+                <input type="text" name="longitude" id="longitude" class="form-control" required value="<?= !empty(old('longitude')) ? old('longitude') : '' ?>">
             </div>
             <div class="img-lama">
                 <label for="foto" class="col-sm-2 col-form-label">Foto Spesimen Lama</label>
