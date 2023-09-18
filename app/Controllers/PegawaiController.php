@@ -129,7 +129,6 @@ class PegawaiController extends BaseController
         $sheet->setCellValue('C1', 'Password');
         $sheet->setCellValue('D1', 'Nip');
         $sheet->setCellValue('E1', 'Telp');
-        $sheet->setCellValue('F1', 'ID Level User');
 
         $column = 2; //kolom start
 
@@ -140,7 +139,6 @@ class PegawaiController extends BaseController
          $sheet->setCellValue('C'.$column, $value->PASSWORD);
          $sheet->setCellValue('D'.$column, $value->NIP);
          $sheet->setCellValue('E'.$column, $value->TELP);
-         $sheet->setCellValue('F'.$column, $value->USERLEVELID);
          $column++;
        }
         //Mengatur style yang ada
@@ -164,7 +162,6 @@ class PegawaiController extends BaseController
        $sheet->getColumnDimension('B')->setAutoSize(true);
        $sheet->getColumnDimension('C')->setAutoSize(true);
        $sheet->getColumnDimension('D')->setAutoSize(true);
-       $sheet->getColumnDimension('F')->setAutoSize(true);
 
 
         //untuk melakukan download excel dan penamaan file nya

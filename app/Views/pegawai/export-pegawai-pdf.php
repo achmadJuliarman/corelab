@@ -54,7 +54,6 @@
                         <th>Nama</th>
                         <th>NIP</th>
                         <th>No Telp</th>
-                        <th>ID Lever User</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -64,7 +63,6 @@
                             <td><?= $p->NAMA ?></td>
                             <td><?= $p->NIP ?></td>
                             <td><?= $p->TELP ?></td>
-                            <td><?= $p->USERLEVELID ?></td>
                         
                         </tr>
                     <?php endforeach; ?>
