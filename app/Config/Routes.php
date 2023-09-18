@@ -43,8 +43,9 @@ $routes->post('/core/edit', 'CoreController::edit');
 $routes->delete('/core/hapus', 'CoreController::hapus');
 
 
-
-
+// ROUTE UNTUK DASHBOARD
+$routes->get('/dashboard', 'PagesController::index');
+$routes->get('/dashboard/grafik', 'PagesController::getDataForChart');
 
 
 
