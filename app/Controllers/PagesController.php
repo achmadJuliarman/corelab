@@ -13,14 +13,13 @@ class PagesController extends BaseController
             "title" => "Dashboard",
             "sub_menu" => "data-dashboard",
             'depth' => [
-                'kurang2200' => $this->db->query('SELECT COUNT(No) AS jumlah FROM db_corestorage2007 WHERE DEPTH >= -2200')->getRow(),
-                'kurang4400' => $this->db->query('SELECT COUNT(No) AS jumlah FROM db_corestorage2007 WHERE DEPTH >= -4400 AND DEPTH < -2200')->getRow(),
-                'kurang6600' => $this->db->query('SELECT COUNT(No) AS jumlah FROM db_corestorage2007 WHERE DEPTH >= -6600 AND DEPTH < -4400')->getRow(),
-                'kurang8800' => $this->db->query('SELECT COUNT(No) AS jumlah FROM db_corestorage2007 WHERE DEPTH >= -8800 AND DEPTH < -6600')->getRow(),
-                'kurang11100' => $this->db->query('SELECT COUNT(No) AS jumlah FROM db_corestorage2007 WHERE DEPTH >= -11100 AND DEPTH < -8800')->getRow(),
+                'kurang1000' => $this->db->query('SELECT COUNT(No) AS jumlah FROM db_corestorage2007 WHERE DEPTH >= -1000')->getRow(),
+                'kurang2000' => $this->db->query('SELECT COUNT(No) AS jumlah FROM db_corestorage2007 WHERE DEPTH >= -2000 AND DEPTH < -1000')->getRow(),
+                'kurang3000' => $this->db->query('SELECT COUNT(No) AS jumlah FROM db_corestorage2007 WHERE DEPTH >= -3000 AND DEPTH < -2000')->getRow(),
+                'kurang4000' => $this->db->query('SELECT COUNT(No) AS jumlah FROM db_corestorage2007 WHERE DEPTH >= -4000 AND DEPTH < -3000')->getRow(),
+                'kurang5000' => $this->db->query('SELECT COUNT(No) AS jumlah FROM db_corestorage2007 WHERE DEPTH >= -5000 AND DEPTH < -4000')->getRow(),
             ]
         ];
         return view('dashboard/index', $data);
     }
-
 }
