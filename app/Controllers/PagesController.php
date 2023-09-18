@@ -10,53 +10,17 @@ class PagesController extends BaseController
     public function index(): string
     {
         $data = [
-            "title" => "Pages",
-            "sub_menu" => "dashboard",
+            "title" => "Dashboard",
+            "sub_menu" => "data-dashboard",
+            'depth' => [
+                'kurang2200' => $this->db->query('SELECT COUNT(No) AS jumlah FROM db_corestorage2007 WHERE DEPTH >= -2200')->getRow(),
+                'kurang4400' => $this->db->query('SELECT COUNT(No) AS jumlah FROM db_corestorage2007 WHERE DEPTH >= -4400 AND DEPTH < -2200')->getRow(),
+                'kurang6600' => $this->db->query('SELECT COUNT(No) AS jumlah FROM db_corestorage2007 WHERE DEPTH >= -6600 AND DEPTH < -4400')->getRow(),
+                'kurang8800' => $this->db->query('SELECT COUNT(No) AS jumlah FROM db_corestorage2007 WHERE DEPTH >= -8800 AND DEPTH < -6600')->getRow(),
+                'kurang11100' => $this->db->query('SELECT COUNT(No) AS jumlah FROM db_corestorage2007 WHERE DEPTH >= -11100 AND DEPTH < -8800')->getRow(),
+            ]
         ];
-        // dd($data['core']);
         return view('dashboard/index', $data);
     }
 
-    public function getDataFromDatabase()
-    {
-        $coreModel = new CoreModel();
-        $depthData = $coreModel->select('DEPTH')->findAll();
-        return json_encode($depthData);
-    }
-
-    public function getDataForChart()
-    {
-        $coreModel = new CoreModel();
-        // $depthData = $coreModel->select('DEPTH')->findAll();
-        $dataPerDepth = $this->hitungDataPerDepth();
-
-        // Ubah data kedalaman menjadi array
-        // $depthArray = [];
-        // foreach ($depthData as $data) {
-        //     $depthArray[] = $data->DEPTH;
-        // }
-
-        return json_encode($dataPerDepth);
-        // return json_encode($depthArray);
-    }
-
-    public function hitungDataPerDepth()
-    {
-        $coreModel = new CoreModel();
-
-        // Gunakan SQL Builder untuk mengelompokkan dan menghitung data berdasarkan depth
-        $query = $coreModel->select('DEPTH, COUNT(*) as jumlah_row')
-            ->groupBy('DEPTH')
-            ->findAll();
-
-        // Buat array untuk menyimpan data hasil perhitungan
-        $dataPerDepth = [];
-
-        // Iterasi hasil query dan tambahkan ke array
-        foreach ($query as $result) {
-            $dataPerDepth[$result->DEPTH] = $result->jumlah_row;
-        }
-
-        return json_encode($dataPerDepth);
-    }
 }

@@ -63,5 +63,6 @@ abstract class BaseController extends Controller
         $this->pegawaiModel = new PegawaiModel();
         $this->coreModel = new CoreModel();
         $this->userLevelModel = new UserLevelModel();
+        $this->db = db_connect();
     }
 }

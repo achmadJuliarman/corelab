@@ -33,5 +33,65 @@
     </div>
 </div>
 
-<script src="/public/assets/assets/demo/chart-bar-demo.js"></script>
+
+
+<!-- ============================ -->
+<!--    BARCHART UNTUK DEPTH -->
+<!-- ============================ -->
+
+<script>
+// Set new default font family and font color to mimic Bootstrap's default styling
+Chart.defaults.global.defaultFontFamily = '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
+Chart.defaults.global.defaultFontColor = '#292b2c';
+
+// Bar Chart Example
+var ctx = document.getElementById("myBarChart");
+
+
+var myLineChart = new Chart(ctx, {
+  type: 'bar',
+  data: {
+    labels: ["0 - 2200", "2201 - 4400", "4401 - 6600", "6601 - 8800", "8801 - 11100"],
+    datasets: [{
+      label: "Jumlah",
+      backgroundColor: "rgba(255, 165, 0)",
+      borderColor: "rgba(2,117,216,1)",
+      data: [
+            <?= $depth['kurang2200']->jumlah ?>,
+            <?= $depth['kurang4400']->jumlah ?>,
+            <?= $depth['kurang6600']->jumlah ?>,
+            <?= $depth['kurang8800']->jumlah ?>,
+            <?= $depth['kurang11100']->jumlah ?>,
+      ],
+    }],
+  },
+  options: {
+    scales: {
+      xAxes: [{
+        type: 'category',
+        gridLines: {
+          display: false
+        },
+        ticks: {
+          maxTicksLimit: 7
+        }
+      }],
+      yAxes: [{
+        ticks: {
+          min: 0,
+          max: 12000, 
+          maxTicksLimit: 5
+        },
+        gridLines: {
+          display: true
+        }
+      }],
+    },
+    legend: {
+      display: false
+    }
+  }
+});
+    
+</script>
 <?= $this->endSection() ?>
