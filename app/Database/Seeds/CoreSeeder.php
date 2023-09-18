@@ -9,7 +9,7 @@ class CoreSeeder extends Seeder
     public function run()
     {
         // Simple Queries
-        $this->db->query('TRUNCATE tbl_pegawai');
+        $this->db->query('TRUNCATE db_corestorage2007');
         $this->db->query(
         "insert 
         into `db_corestorage2007`(`No`,`SHIP`,`CRUISE_`,`SAMPEL_NUM`,`DEVICE`,`SUM`,`DATE`,`DEPTH`,`LENGTH`,`LOCATION`,`SED_TYPE`,`STORAGE`,`REMARK`,`VOL`,`LATITUDE`,`LONGITUDE`,`LOKASI_RAK`,`FOTO_SPESIMEN`,`NO_KLASIFIKASI_LAPORAN`,`PETA_LINTASAN`,`STATUS_ANALISA`) values 
