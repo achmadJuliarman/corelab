@@ -58,7 +58,7 @@ class PegawaiController extends BaseController
             'PASSWORD' => $this->request->getVar('pass'),
             'NIP' => $this->request->getVar('nip'),
             'TELP' => $this->request->getVar('telp'),
-            'USERLEVELID' => $this->request->getVar('level')
+            'ID_LEVEL' => $this->request->getVar('level')
         ];
     
         $this->pegawaiModel->save($data);
@@ -104,7 +104,7 @@ class PegawaiController extends BaseController
             'NAMA' => $this->request->getVar('nama'),
             'NIP' => $this->request->getVar('nip'),
             'TELP' => $this->request->getVar('telp'),
-            'USERLEVELID' => $this->request->getVar('level'),
+            'ID_LEVEL' => $this->request->getVar('level'),
         ];
         $this->pegawaiModel->update($data['NO'], $data);
         return redirect()->to('pegawai/')->with('success', 'Berhasil Ubah Data Pegawai');
