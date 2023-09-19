@@ -31,18 +31,16 @@ class PegawaiController extends BaseController
                 ]
             ],
             'telp' => [
-                'rules' => 'required|min_length[11]|numeric',
+                'rules' => 'required|numeric',
                 'errors' => [
                     'required' => 'No Telp Tidak Boleh Kosong',
-                    'min_length' => 'No telp Minimal 11 karakter',
                     'numeric' => 'No telp Harus Berupa Angka'
                 ]
             ],
             'nip' => [
-                'rules' => 'required|min_length[18]|numeric',
+                'rules' => 'required',
                 'errors' => [
                     'required' => 'NIP Harus Diisi',
-                    'min_length' => 'NIP NIP Minimal 18 Karakter',
                     'numeric' => 'NIP Harus Berupa Angka'
                 ]
             ]
@@ -70,26 +68,22 @@ class PegawaiController extends BaseController
     {
         $validInput = $this->validate([
             'nama' => [
-                'rules' => 'required|is_unique[tbl_pegawai.NAMA]',
+                'rules' => 'required',
                 'errors' => [
-                    'required' => 'Nama Pegawai Tidak Boleh Kosong',
-                    'is_unique' => 'Nama / Username Pegawai sudah ada'
+                    'required' => 'Nama Pegawai Tidak Boleh Kosong'
                 ]
             ],
             'telp' => [
-                'rules' => 'required|min_length[11]|numeric',
+                'rules' => 'required|numeric',
                 'errors' => [
                     'required' => 'No Telp Tidak Boleh Kosong',
-                    'min_length' => 'No telp Minimal 11 karakter',
                     'numeric' => 'No telp Harus Berupa Angka'
                 ]
             ],
             'nip' => [
-                'rules' => 'required|min_length[18]|numeric',
+                'rules' => 'required',
                 'errors' => [
-                    'required' => 'NIP Harus Diisi',
-                    'min_length' => 'NIP NIP Minimal 18 Karakter',
-                    'numeric' => 'NIP Harus Berupa Angka'
+                    'required' => 'NIP Harus Diisi'
                 ]
             ]
         ]);
