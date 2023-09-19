@@ -27,7 +27,6 @@ $routes->get('/user', 'UserController::index');
 
 // ROUTE UNTUK PEGAWAI
 $routes->get('/pegawai', 'PegawaiController::index', ['filter' => 'stayLogin']);
-$routes->get('/pegawai', 'PegawaiController::index');
 $routes->post('/pegawai/tambah', 'PegawaiController::tambah');
 $routes->post('/pegawai/ubah', 'PegawaiController::ubah');
 $routes->delete('/pegawai/hapus', 'PegawaiController::hapus');
@@ -37,15 +36,14 @@ $routes->delete('/pegawai/hapus', 'PegawaiController::hapus');
 
 // ROUTE UNTUK CORE
 $routes->get('/core', 'CoreController::index', ['filter' => 'stayLogin']);
-$routes->get('/core', 'CoreController::index');
 $routes->post('/core/tambah', 'CoreController::tambah');
 $routes->post('/core/edit', 'CoreController::edit');
 $routes->delete('/core/hapus', 'CoreController::hapus');
 
 
 // ROUTE UNTUK DASHBOARD
-$routes->get('/dashboard', 'PagesController::index');
-$routes->get('/dashboard/grafik', 'PagesController::getDataForChart');
+$routes->get('/dashboard', 'PagesController::index', ['filter' => 'stayLogin']);
+
 
 
 
