@@ -74,6 +74,7 @@ class LoginController extends BaseController
         $data = [
             'NO' => $user->NO,
             'NAMA' => $user->NAMA,
+            'ID_LEVEL' => $user->ID_LEVEL,
             'isLoggedIn' => true,
         ];
 
