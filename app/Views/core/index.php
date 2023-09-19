@@ -30,23 +30,23 @@
     <!-- ================================================================ -->
 
     <!-- BUTTON TRIGGER MODAL TAMBAH -->
-    <div class="<?= session('ID_LEVEL') == 3 ? 'd-none' : '' ?>">
-        <button type="button" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#modalTambah">
-            <i class="fa-solid fa-plus"></i> Tambah Data Core
-        </button>
-    </div>
 
-    <div class="<?= session('ID_LEVEL') == 3 ? 'd-none' : '' ?>">
-        <a href="<?= site_url('core/exportexcel') ?>" class="btn btn-primary mb-3">
-            <i class="fa-solid fa-file-excel"></i> Export Excel
-        </a>
-    </div>
+    <button type="button" class="btn btn-primary mb-3 <?= session('ID_LEVEL') == 3 ? 'd-none' : '' ?>" data-bs-toggle="modal" data-bs-target="#modalTambah">
+        <i class="fa-solid fa-plus"></i> Tambah Data Core
+    </button>
 
-    <div class="<?= session('ID_LEVEL') == 3 ? 'd-none' : '' ?>">
-        <a onclick="window.open(this.href,'_blank'); return false;" href="<?= site_url('core/exportpdf') ?>" class="btn btn-warning mb-3">
-            <i class="fa-solid fa-file-pdf"></i> Export PDF
-        </a>
-    </div>
+
+
+    <a href="<?= site_url('core/exportexcel') ?>" class="btn btn-primary mb-3 <?= session('ID_LEVEL') == 3 ? 'd-none' : '' ?>">
+        <i class="fa-solid fa-file-excel"></i> Export Excel
+    </a>
+
+
+
+    <a onclick="window.open(this.href,'_blank'); return false;" href="<?= site_url('core/exportpdf') ?>" class="btn btn-warning mb-3 <?= session('ID_LEVEL') == 3 ? 'd-none' : '' ?>">
+        <i class="fa-solid fa-file-pdf"></i> Export PDF
+    </a>
+
 
     <!-- END TRIGGER -->
     <div class="card mb-4">
@@ -97,17 +97,17 @@
                                 <a href="#" class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#modalDetail" data-sampel="<?= $c->SAMPEL_NUM ?>" data-no="<?= $c->No ?>" data-ship="<?= $c->SHIP ?>" data-cruise="<?= $c->CRUISE_ ?>" data-device="<?= $c->DEVICE ?>" data-sum="<?= $c->SUM ?>" data-date="<?= $c->DATE ?>" data-depth="<?= $c->DEPTH ?>" data-length="<?= $c->LENGTH ?>" data-location="<?= $c->LOCATION ?>" data-sed="<?= $c->SED_TYPE ?>" data-storage="<?= $c->STORAGE ?>" data-remark="<?= $c->REMARK ?>" data-vol="<?= $c->VOL ?>" data-latitude="<?= $c->LATITUDE ?>" data-longitude="<?= $c->LONGITUDE ?>" data-foto="<?= $c->FOTO_SPESIMEN ?>" id="btn-detail">
                                     <i class="fa-solid fa-eye"></i>
                                 </a>
-                                <div class="<?= session('ID_LEVEL') == 3 ? 'd-none' : '' ?>">
-                                    <a href="" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#modalUbah" data-sampel="<?= $c->SAMPEL_NUM ?>" data-no="<?= $c->No ?>" data-ship="<?= $c->SHIP ?>" data-cruise="<?= $c->CRUISE_ ?>" data-device="<?= $c->DEVICE ?>" data-sum="<?= $c->SUM ?>" data-date="<?= $c->DATE ?>" data-depth="<?= $c->DEPTH ?>" data-length="<?= $c->LENGTH ?>" data-location="<?= $c->LOCATION ?>" data-sed="<?= $c->SED_TYPE ?>" data-storage="<?= $c->STORAGE ?>" data-remark="<?= $c->REMARK ?>" data-vol="<?= $c->VOL ?>" data-latitude="<?= $c->LATITUDE ?>" data-longitude="<?= $c->LONGITUDE ?>" data-foto="<?= $c->FOTO_SPESIMEN ?>" id="btn-ubah">
-                                        <l class="fas fa-edit"></l>
-                                    </a>
-                                </div>
+                                <!--  -->
+                                <a href="" class="btn btn-success btn-sm <?= session('ID_LEVEL') == 3 ? 'd-none' : '' ?>" data-bs-toggle="modal" data-bs-target="#modalUbah" data-sampel="<?= $c->SAMPEL_NUM ?>" data-no="<?= $c->No ?>" data-ship="<?= $c->SHIP ?>" data-cruise="<?= $c->CRUISE_ ?>" data-device="<?= $c->DEVICE ?>" data-sum="<?= $c->SUM ?>" data-date="<?= $c->DATE ?>" data-depth="<?= $c->DEPTH ?>" data-length="<?= $c->LENGTH ?>" data-location="<?= $c->LOCATION ?>" data-sed="<?= $c->SED_TYPE ?>" data-storage="<?= $c->STORAGE ?>" data-remark="<?= $c->REMARK ?>" data-vol="<?= $c->VOL ?>" data-latitude="<?= $c->LATITUDE ?>" data-longitude="<?= $c->LONGITUDE ?>" data-foto="<?= $c->FOTO_SPESIMEN ?>" id="btn-ubah">
+                                    <l class="fas fa-edit"></l>
+                                </a>
 
-                                <div class="<?= session('ID_LEVEL') == 3 ? 'd-none' : '' ?>">
-                                    <a href="" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#modalHapus" data-sampel="<?= $c->SAMPEL_NUM ?>" data-no="<?= $c->No ?>" id="btn-hapus">
-                                        <i class="fas fa-trash-alt"></i>
-                                    </a>
-                                </div>
+
+                                <!--  -->
+                                <a href="" class="btn btn-danger btn-sm <?= session('ID_LEVEL') == 3 ? 'd-none' : '' ?>" data-bs-toggle="modal" data-bs-target="#modalHapus" data-sampel="<?= $c->SAMPEL_NUM ?>" data-no="<?= $c->No ?>" id="btn-hapus">
+                                    <i class="fas fa-trash-alt"></i>
+                                </a>
+
                             </td>
                         </tr>
                     <?php endforeach; ?>
