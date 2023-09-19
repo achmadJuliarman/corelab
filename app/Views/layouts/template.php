@@ -52,7 +52,7 @@
                             Core
                         </div>
                         <div class="<?= session('ID_LEVEL') == 3 ? 'd-none' : '' ?>">
-                            <a class="nav-link <?= ($sub_menu == 'dashboard') ? 'active' : '' ?>" href="<?= base_url('dashboard') ?>" href="index.html">
+                            <a class="nav-link <?= ($sub_menu == 'data-dashboard') ? 'active' : '' ?>" href="<?= base_url('dashboard') ?>" href="index.html">
                                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                                 Dashboard
                             </a>
