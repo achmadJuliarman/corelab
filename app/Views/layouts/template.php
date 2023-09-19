@@ -49,18 +49,24 @@
                 <div class="sb-sidenav-menu">
                     <div class="nav">
                         <div class="sb-sidenav-menu-heading">Core</div>
-                        <a class="nav-link <?= ($sub_menu == 'dashboard') ? 'active' : '' ?>" href="<?= base_url('dashboard') ?>" href="index.html">
-                            <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                            Dashboard
-                        </a>
-                        <div class="<?= (session('ID_LEVEL') == 2) ? 'd-none' : '' ?>">
-                            <div class="sb-sidenav-menu-heading">Interface</div>
-                                <a class="nav-link <?= ($sub_menu == 'data-pegawai') ? 'active' : '' ?>" href="<?= base_url('pegawai') ?>">
-                                    Pegawai
-                                </a>
-                                <a class="nav-link <?= ($sub_menu == 'data-core') ? 'active' : '' ?>" href="<?= base_url('core') ?>">
-                                    CORE
-                                </a>
+                        <div>
+                            <a class="nav-link <?= ($sub_menu == 'dashboard') ? 'active' : '' ?>" href="<?= base_url('dashboard') ?>" href="index.html">
+                                <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                                Dashboard
+                            </a>
+                        </div>
+                        <div class="sb-sidenav-menu-heading <?= session('ID_LEVEL') == 2 ? 'd-none' : ''?>">
+                            Data
+                        </div>
+                        <div class="<?= session('ID_LEVEL') == 2 | session('ID_LEVEL') == 3 ? 'd-none' : ''?>">
+                            <a class="nav-link <?= ($sub_menu == 'data-pegawai') ? 'active' : '' ?>" href="<?= base_url('pegawai') ?>">
+                                Pegawai
+                            </a>
+                        </div>
+                        <div class="<?= session('ID_LEVEL') == 2 ? 'd-none' : ''?>">
+                            <a class="nav-link <?= ($sub_menu == 'data-core') ? 'active' : '' ?>" href="<?= base_url('core') ?>">
+                                CORE
+                            </a>
                         </div>
                     </div>
                 </div>
