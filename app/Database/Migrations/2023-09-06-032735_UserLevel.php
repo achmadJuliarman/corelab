@@ -24,6 +24,6 @@ class UserLevel extends Migration
 
     public function down()
     {
-        $this->forge->dropTable('user_levels');
+        $this->forge->dropTable('user_levels', true);
     }
 }

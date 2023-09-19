@@ -98,6 +98,6 @@ class Core extends Migration
 
     public function down()
     {
-        $this->forge->dropTable('db_corestorage2007');
+        $this->forge->dropTable('db_corestorage2007', true);
     }
 }
