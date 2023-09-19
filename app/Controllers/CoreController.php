@@ -27,9 +27,9 @@ class CoreController extends BaseController
         $fotoSpesimen = $this->request->getFile('foto');
 
         // cek apakah ada foto atau tidak
-        if($fotoSpesimen->getError() == 4){
+        if ($fotoSpesimen->getError() == 4) {
             $fotoName = 'default.jpg';
-        }else{
+        } else {
             $fotoName = $fotoSpesimen->getRandomName();
             $fotoSpesimen->move(ROOTPATH . 'public/assets/img', $fotoName);
         }
@@ -59,7 +59,7 @@ class CoreController extends BaseController
     public function edit()
     {
         // cek apakah foto baru ada ?
-        if($this->request->getFile('foto')->getError() !== 4){
+        if ($this->request->getFile('foto')->getError() !== 4) {
             // ambil file foto spesimen
             $fotoSpesimen = $this->request->getFile('foto');
             $fotoName = $fotoSpesimen->getRandomName();
@@ -67,15 +67,15 @@ class CoreController extends BaseController
 
             // hapus foto lama
             // cari gambar berdasarkan id
-            $no = $this->request->getVar('no'); 
+            $no = $this->request->getVar('no');
             $foto_lama = $this->coreModel->find($no);
 
             dd('gambar ada');
             // hapus gambar 
             if ($foto_lama != 'default.png') {
-                unlink('assets/img/'.$foto_lama->FOTO_SPESIMEN);
+                unlink('assets/img/' . $foto_lama->FOTO_SPESIMEN);
             }
-        }else{
+        } else {
             $fotoName = $this->request->getVar('foto-lama');
         }
 
@@ -106,11 +106,11 @@ class CoreController extends BaseController
     public function hapus()
     {
         // cari gambar berdasarkan id
-        $no = $this->request->getVar('no'); 
+        $no = $this->request->getVar('no');
         $foto = $this->coreModel->find($no);
         // hapus gambar 
         if ($foto->FOTO_SPESIMEN != 'default.png') {
-            unlink('assets/img/'.$foto->FOTO_SPESIMEN);
+            unlink('assets/img/' . $foto->FOTO_SPESIMEN);
         }
         $this->coreModel->delete($no);
         return redirect()->to('core/')->with('success', 'Berhasil Hapus Data CORE');
@@ -122,57 +122,56 @@ class CoreController extends BaseController
         $pegawai = $this->coreModel->findAll();
         $spreadsheet = new Spreadsheet();
         $sheet = $spreadsheet->getActiveSheet();
-        
+
         $sheet->setCellValue('A1', 'No');
         $sheet->setCellValue('B1', 'Ship');
         $sheet->setCellValue('C1', 'Cruise');
         $sheet->setCellValue('D1', 'Sample Number');
-        $sheet->setCellValue('E1', 'Sum');
-        $sheet->setCellValue('F1', 'Date');
-        $sheet->setCellValue('G1', 'Depth');
-        $sheet->setCellValue('H1', 'Length');
-        $sheet->setCellValue('I1', 'Location');
+
+        $sheet->setCellValue('E1', 'Date');
+        $sheet->setCellValue('F1', 'Depth');
+        $sheet->setCellValue('G1', 'Length');
+        $sheet->setCellValue('H1', 'Location');
 
         $column = 2; //kolom start
 
         //Untuk mengatur value dalam excel
-       foreach ($pegawai as $key => $value) {
-         $sheet->setCellValue('A'.$column, ($column-1));
-         $sheet->setCellValue('B'.$column, $value->SHIP);
-         $sheet->setCellValue('C'.$column, $value->CRUISE_);
-         $sheet->setCellValue('D'.$column, $value->SAMPEL_NUM);
-         $sheet->setCellValue('E'.$column, $value->SUM);
-         $sheet->setCellValue('F'.$column, $value->DATE);
-         $sheet->setCellValue('G'.$column, $value->DEPTH);
-         $sheet->setCellValue('H'.$column, $value->LENGTH);
-         $sheet->setCellValue('I'.$column, $value->LOCATION);
-         $column++;
-       }
+        foreach ($pegawai as $key => $value) {
+            $sheet->setCellValue('A' . $column, ($column - 1));
+            $sheet->setCellValue('B' . $column, $value->SHIP);
+            $sheet->setCellValue('C' . $column, $value->CRUISE_);
+            $sheet->setCellValue('D' . $column, $value->SAMPEL_NUM);
+            $sheet->setCellValue('E' . $column, $value->DATE);
+            $sheet->setCellValue('F' . $column, $value->DEPTH);
+            $sheet->setCellValue('G' . $column, $value->LENGTH);
+            $sheet->setCellValue('H' . $column, $value->LOCATION);
+            $column++;
+        }
         //Mengatur style yang ada
-       $sheet->getStyle('A1:I1')->getFont()->setBold(true);
-       $sheet->getStyle('A1:I1')->getFill()
-             ->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)
-             ->getStartColor()->setARGB('FFFFFF00');
-       $styleArray = [
+        $sheet->getStyle('A1:H1')->getFont()->setBold(true);
+        $sheet->getStyle('A1:H1')->getFill()
+            ->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)
+            ->getStartColor()->setARGB('FFFFFF00');
+        $styleArray = [
             'borders' => [
-                'allBorders' =>[
+                'allBorders' => [
                     'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
                     'color' => ['argb' => 'FF000000'],
                 ],
             ],
         ];
 
-       $sheet->getStyle('A1:I'.($column-1))->applyFromArray($styleArray);
+        $sheet->getStyle('A1:H' . ($column - 1))->applyFromArray($styleArray);
 
         //Agar Auto Size saat di export di excel
-       $sheet->getColumnDimension('A')->setAutoSize(true);
-       $sheet->getColumnDimension('B')->setAutoSize(true);
-       $sheet->getColumnDimension('C')->setAutoSize(true);
-       $sheet->getColumnDimension('D')->setAutoSize(true);
-       $sheet->getColumnDimension('F')->setAutoSize(true);
-       $sheet->getColumnDimension('G')->setAutoSize(true);
-       $sheet->getColumnDimension('H')->setAutoSize(true);
-       $sheet->getColumnDimension('I')->setAutoSize(true);
+        $sheet->getColumnDimension('A')->setAutoSize(true);
+        $sheet->getColumnDimension('B')->setAutoSize(true);
+        $sheet->getColumnDimension('C')->setAutoSize(true);
+        $sheet->getColumnDimension('D')->setAutoSize(true);
+        $sheet->getColumnDimension('F')->setAutoSize(true);
+        $sheet->getColumnDimension('G')->setAutoSize(true);
+        $sheet->getColumnDimension('H')->setAutoSize(true);
+        $sheet->getColumnDimension('I')->setAutoSize(true);
 
 
         //untuk melakukan download excel dan penamaan file nya
@@ -190,7 +189,7 @@ class CoreController extends BaseController
             "core" => $this->coreModel->orderBy('NO', 'ASCE')->findAll(),
         ];
 
-        $view = view('core/export-core-pdf' , $data);
+        $view = view('core/export-core-pdf', $data);
 
         // instantiate and use the dompdf class
         $dompdf = new Dompdf();
@@ -204,7 +203,6 @@ class CoreController extends BaseController
         $dompdf->render();
 
         // Output the generated PDF to Browser
-        $dompdf->stream("data-core", array("Attachment"=>false));
-
+        $dompdf->stream("data-core", array("Attachment" => false));
     }
 }

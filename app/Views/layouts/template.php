@@ -19,13 +19,13 @@
 <body class="sb-nav-fixed">
     <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
         <!-- Navbar Brand-->
-         <a href="dashboard"><img src="assets/img/logo.png" alt="esdm" border="0" style="width: 130px; height: auto; margin-top: 8px;"></a>
+        <a href="dashboard"><img src="assets/img/logo.png" alt="esdm" border="0" style="width: 130px; height: auto; margin-top: 8px;"></a>
         <!-- Sidebar Toggle-->
         <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
         <!-- Navbar Search-->
         <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
             <div class="input-group">
-            
+
             </div>
         </form>
         <!-- Navbar-->
@@ -48,22 +48,24 @@
             <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
                 <div class="sb-sidenav-menu">
                     <div class="nav">
-                        <div class="sb-sidenav-menu-heading">Core</div>
-                        <div>
-                            <a class="nav-link <?= ($sub_menu == 'dashboard') ? 'active' : '' ?>" href="<?= base_url('dashboard') ?>" href="index.html">
+                        <div class="sb-sidenav-menu-heading <?= session('ID_LEVEL') == 3 ? 'd-none' : '' ?> ">
+                            Core
+                        </div>
+                        <div class="<?= session('ID_LEVEL') == 3 ? 'd-none' : '' ?>">
+                            <a class="nav-link <?= ($sub_menu == 'data-dashboard') ? 'active' : '' ?>" href="<?= base_url('dashboard') ?>" href="index.html">
                                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                                 Dashboard
                             </a>
                         </div>
-                        <div class="sb-sidenav-menu-heading <?= session('ID_LEVEL') == 2 ? 'd-none' : ''?>">
+                        <div class="sb-sidenav-menu-heading <?= session('ID_LEVEL') == 2  ? 'd-none' : '' ?>">
                             Data
                         </div>
-                        <div class="<?= session('ID_LEVEL') == 2 | session('ID_LEVEL') == 3 ? 'd-none' : ''?>">
+                        <div class="<?= session('ID_LEVEL') == 2 | session('ID_LEVEL') == 3 ? 'd-none' : '' ?>">
                             <a class="nav-link <?= ($sub_menu == 'data-pegawai') ? 'active' : '' ?>" href="<?= base_url('pegawai') ?>">
                                 Pegawai
                             </a>
                         </div>
-                        <div class="<?= session('ID_LEVEL') == 2 ? 'd-none' : ''?>">
+                        <div class="<?= session('ID_LEVEL') == 2 ? 'd-none' : '' ?>">
                             <a class="nav-link <?= ($sub_menu == 'data-core') ? 'active' : '' ?>" href="<?= base_url('core') ?>">
                                 CORE
                             </a>
