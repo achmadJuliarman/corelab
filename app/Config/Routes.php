@@ -29,7 +29,7 @@ $routes->get('/user', 'UserController::index');
 $routes->get('/pegawai', 'PegawaiController::index', ['filter' => 'stayLogin']);
 $routes->post('/pegawai/tambah', 'PegawaiController::tambah');
 $routes->post('/pegawai/ubah', 'PegawaiController::ubah');
-$routes->delete('/pegawai/hapus', 'PegawaiController::hapus');
+$routes->delete('pegawai/hapus/(:num)', 'PegawaiController::hapus/$1');
 
 
 

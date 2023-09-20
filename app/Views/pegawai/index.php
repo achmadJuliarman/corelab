@@ -82,9 +82,13 @@
                                 <a href="" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#modalUbah" id="btn-ubah" data-nama="<?= $p->NAMA ?>" data-no="<?= $p->NO ?>" data-nip="<?= $p->NIP ?>" data-telp="<?= $p->TELP ?>" data-level="<?= $p->ID_LEVEL ?>">
                                     <l class="fas fa-edit"></l>
                                 </a>
-                                <a href="" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#modalHapus" data-nama="<?= $p->NAMA ?>" data-no="<?= $p->NO ?>" id="btn-hapus">
-                                    <i class="fas fa-trash-alt"></i>
+
+                                <a href="#" class="btn btn-danger btn-sm" data-nama="<?= $p->NAMA ?>" data-no="<?= $p->NO ?>" id="btn-hapus">
+                                <i class="fas fa-trash-alt"></i>
                                 </a>
+                               <!--  <a href="" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#modalHapus" data-nama="<?= $p->NAMA ?>" data-no="<?= $p->NO ?>" id="btn-hapus">
+                                    <i class="fas fa-trash-alt"></i>
+                                </a> -->
                             </td>
                         </tr>
                     <?php endforeach; ?>
@@ -124,7 +128,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="telp">No Telp</label>
-                        <input type="text" name="telp" id="telp" class="form-control" required value="<?= !empty(old('telp')) ? old('telp') : '' ?>">
+                        <input type="number" name="telp" id="telp" class="form-control" required value="<?= !empty(old('telp')) ? old('telp') : '' ?>">
                     </div>
                     <div class="mb-4">
                         <label for="telp">Level User</label>
@@ -172,7 +176,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="telp">No Telp</label>
-                        <input type="text" name="telp" id="telp" class="form-control" required value="<?= !empty(old('telp')) ? old('telp') : '' ?>">
+                        <input type="number" name="telp" id="telp" class="form-control" required value="<?= !empty(old('telp')) ? old('telp') : '' ?>">
                     </div>
                     <div class="mb-4">
                         <label for="telp">Level User</label>
@@ -207,7 +211,20 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form action="<?= base_url('pegawai/hapus') ?>" method="post">
+                <form action="" method="post">
+                 <?= csrf_field() ?>
+                    <div class="mb-3">
+                 <input type="hidden" name="_method" value="DELETE">
+                    <input type="hidden" name="no" value="" id="no">
+                <label for="nama_pegawai">Nama Pegawai</label>
+                <input type="text" name="nama_pegawai" id="nama_pegawai" class="form-control" required readonly>
+                </div>
+                <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-danger">YA</button>
+                </div>
+                </form>
+               <!--  <form action="<?= base_url('pegawai/hapus') ?>" method="post">
                     <?= csrf_field() ?>
                     <div class="mb-3">
                         <input type="hidden" name="_method" value="DELETE">
@@ -219,7 +236,7 @@
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                         <button type="submit" class="btn btn-danger">YA</button>
                     </div>
-                </form>
+                </form> -->
             </div>
 
         </div>
@@ -227,15 +244,60 @@
 </div>
 <!-- END MODAL HAPUS -->
 
+<script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const successParam = urlParams.get('success');
+
+    document.addEventListener('DOMContentLoaded', (event) => {
+        if (successParam === 'true') {
+            Swal.fire({
+                title: "Added!",
+                text: "Data berhasil ditambahkan.",
+                icon: "success"
+            });
+        }
+    });
+</script>
+
 
 <script>
-    $(document).on('click', '#btn-hapus', function() {
+$(document).on('click', '#btn-hapus', function() {
+    const no = $(this).data('no');
+    const nama = $(this).data('nama');
+
+    Swal.fire({
+        title: 'Yakin ingin hapus data ini?',
+        text: "Data yang dihapus tidak akan kembali lagi",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Ya, hapus data ini!'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            const formAction = '<?= base_url('pegawai/hapus/') ?>' + no;
+            $('#modalHapus form').attr('action', formAction);
+
+            // Submit the form
+            $('#modalHapus form').submit();
+
+            // Display SweetAlert2 notification for successful deletion
+            Swal.fire({
+                title: 'Deleted!',
+                text: 'Data berhasil dihapus.',
+                icon: 'success'
+            });
+        }
+    });
+});
+
+    /*$(document).on('click', '#btn-hapus', function() {
         const no = $(this).data('no');
         const nama = $(this).data('nama');
         console.log(no);
         $('#modalHapus .modal-body #no').val(no);
         $('#modalHapus .modal-body #nama_pegawai').val(nama);
-    });
+    });*/
 
     $(document).on('click', '#btn-ubah', function() {
         const no = $(this).data('no');

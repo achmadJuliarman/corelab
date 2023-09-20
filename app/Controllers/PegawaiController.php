@@ -59,9 +59,14 @@ class PegawaiController extends BaseController
             'ID_LEVEL' => $this->request->getVar('level')
         ];
     
-        $this->pegawaiModel->save($data);
+      if ($this->pegawaiModel->save($data)) {
+        // Data was added successfully
+        return redirect()->to('pegawai/?success=true');
+    } else {
+        // Data addition failed
+        return redirect()->to('pegawai/?success=false');
+    }
 
-        return redirect()->to('pegawai/')->with('success', 'Berhasil Tambah Data Pegawai');
     }
 
     public function ubah()
@@ -104,11 +109,12 @@ class PegawaiController extends BaseController
         return redirect()->to('pegawai/')->with('success', 'Berhasil Ubah Data Pegawai');
     }
 
-    public function hapus()
+   public function hapus($no)
     {
-        $no = $this->request->getVar('no');
-        $this->pegawaiModel->delete($no);
-        return redirect()->to('pegawai/')->with('success', 'Berhasil Hapus Data Pegawai');
+    // Use the $no parameter to delete the data
+    $this->pegawaiModel->delete($no);
+
+    return redirect()->to('pegawai/');
     }
 
     // METHOD - METHOD UNTUK EXPORT DATA PEGAWAI MENJADI BERBAGAI FORMAT FILE
