@@ -212,16 +212,16 @@
             </div>
             <div class="modal-body">
                 <form action="" method="post">
-                 <?= csrf_field() ?>
-                    <div class="mb-3">
-                 <input type="hidden" name="_method" value="DELETE">
+                <?= csrf_field() ?>
+                <div class="mb-3">
+                    <input type="hidden" name="_method" value="DELETE">
                     <input type="hidden" name="no" value="" id="no">
-                <label for="nama_pegawai">Nama Pegawai</label>
-                <input type="text" name="nama_pegawai" id="nama_pegawai" class="form-control" required readonly>
+                    <label for="nama_pegawai">Nama Pegawai</label>
+                    <input type="text" name="nama_pegawai" id="nama_pegawai" class="form-control" required readonly>
                 </div>
                 <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-danger">YA</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-danger">YA</button>
                 </div>
                 </form>
                <!--  <form action="<?= base_url('pegawai/hapus') ?>" method="post">
@@ -354,11 +354,6 @@ $(document).on('click', '#btn-hapus', function() {
         const nip = $(this).data('nip');
         const telp = $(this).data('telp');
         const level = $(this).data('level');
-        console.log(no);
-        console.log(nama);
-        console.log(nip);
-        console.log(telp);
-        console.log(level);
         $('#modalUbah .modal-body #no').val(no);
         $('#modalUbah .modal-body #nama').val(nama);
         $('#modalUbah .modal-body #nip').val(nip);

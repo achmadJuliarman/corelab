@@ -21,6 +21,16 @@ class CoreController extends BaseController
         return view('core/index', $data);
     }
 
+    public function old_index()
+    {
+        $data = [
+            "title" => "Core",
+            "sub_menu" => "data-core",
+            "core" => $this->coreModel->findAll(),
+        ];
+        return view('core/old_index', $data);
+    }
+
     public function tambah()
     {
         $config['upload_path']   = './assets/img';

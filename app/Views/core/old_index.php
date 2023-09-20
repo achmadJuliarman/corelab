@@ -117,9 +117,6 @@
                     <?php endforeach; ?>
                 </tbody>
             </table>
-            <!-- links('nama tabel', 'nama file pagination') -->
-            <!-- nama table ini diambil sesuai dengan yang dikirimkan di controller didalam parameter paginate() -->
-            <?= $pager->links('core', 'core_pagination') ?>
         </div>
     </div>
 </div>
@@ -346,6 +343,14 @@
                     <?= csrf_field() ?>
                     <input type="hidden" name="_method" value="DELETE">
                     <input type="hidden" name="no" id="no">
+                    <div class="mb-3">
+                        <label for="sampel_num">Sampel Num</label>
+                        <input type="text" name="sampel_num" id="sampel_num" class="form-control" required readonly>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-danger">YA</button>
+                    </div>
                 </form>
             </div>
         </div>
@@ -492,7 +497,7 @@
 $(document).on('click', '#btn-hapus', function() {
     const no = $(this).data('no');
     const sampel = $(this).data('sampel');
- 
+
     Swal.fire({
         title: 'Yakin ingin hapus data ini?',
         text: "Data yang dihapus tidak akan kembali lagi",
@@ -610,14 +615,6 @@ $(document).on('click', '#btn-hapus', function() {
         $('#modalDetail .modal-body #longitude').html('<b>Longitude : </b>' + longitude);
         $('#modalDetail .modal-body #foto').attr('src', '<?= base_url() ?>assets/img/' + foto);
     });
-
-
-
-
-
-
-
-
 
 
     // menampilkan file yang dipilih untuk diupload

@@ -41,6 +41,7 @@ $routes->get('/core', 'CoreController::index', ['filter' => 'stayLogin']);
 $routes->post('/core/tambah', 'CoreController::tambah');
 $routes->post('/core/edit', 'CoreController::edit');
 $routes->delete('core/hapus/(:num)', 'CoreController::hapus/$1');
+$routes->get('core/old_index', 'CoreController::old_index');
 
 
 // ROUTE UNTUK DASHBOARD
