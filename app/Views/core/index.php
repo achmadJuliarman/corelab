@@ -113,6 +113,9 @@
                     <?php endforeach; ?>
                 </tbody>
             </table>
+            <!-- links('nama tabel', 'nama file pagination') -->
+            <!-- nama table ini diambil sesuai dengan yang dikirimkan di controller didalam parameter paginate() -->
+            <?= $pager->links('core', 'core_pagination') ?>
         </div>
     </div>
 </div>
@@ -536,7 +539,5 @@
             alert('Harap unggah file gambar!');
         }
     });
-
-    document.get
 </script>
 <?= $this->endSection() ?>

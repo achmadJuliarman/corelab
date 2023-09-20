@@ -106,7 +106,14 @@
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.28/dist/sweetalert2.all.min.js"></script>
 
-
+<script>
+    $(document).ready(function() {
+      $('#dataTable').DataTable({
+        pageLength : 5,
+        lengthMenu: [[5, 10, 20, -1], [5, 10, 20, 'Todos']]
+      });
+    });
+</script>
 </body>
 
 </html>

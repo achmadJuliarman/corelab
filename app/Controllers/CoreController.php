@@ -8,12 +8,14 @@ use Dompdf\Dompdf;
 
 class CoreController extends BaseController
 {
+
     public function index(): string
     {
         $data = [
             "title" => "Core",
             "sub_menu" => "data-core",
-            "core" => $this->coreModel->orderBy('No', 'ASCE')->findAll()
+            "core" => $this->coreModel->paginate(25, 'core'),
+            "pager" => $this->coreModel->pager,
         ];
         // dd($data['core']);
         return view('core/index', $data);
