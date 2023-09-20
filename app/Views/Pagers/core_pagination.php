@@ -1,20 +1,3 @@
-<!-- <nav aria-label="Page navigation example">
-  <ul class="pagination">
-    <li class="page-item">
-      <a class="page-link" href="#" aria-label="Previous">
-        <span aria-hidden="true">&laquo;</span>
-      </a>
-    </li>
-    <li class="page-item"><a class="page-link" href="#">1</a></li>
-    <li class="page-item"><a class="page-link" href="#">2</a></li>
-    <li class="page-item"><a class="page-link" href="#">3</a></li>
-    <li class="page-item">
-      <a class="page-link" href="#" aria-label="Next">
-        <span aria-hidden="true">&raquo;</span>
-      </a>
-    </li>
-  </ul>
-</nav> -->
 
 <?php $pager->setSurroundCount(4) ?>
 <nav aria-label="Page navigation">
@@ -27,7 +10,7 @@
         </li class="page-item">
         <li>
             <a href="<?= $pager->getPreviousPage() ?>" aria-label="<?= lang('Pager.previous') ?>" class="page-link">
-                <span aria-hidden="true"><?= lang('Pager.previous') ?></span>
+                <span aria-hidden="true">&lsaquo;</span>
             </a>
         </li>
     <?php endif ?>
@@ -43,7 +26,7 @@
     <?php if ($pager->hasNext()) : ?>
         <li class="page-item">
             <a href="<?= $pager->getNextPage() ?>" aria-label="<?= lang('Pager.next') ?>" class="page-link">
-                <span aria-hidden="true"><?= lang('Pager.next') ?></span>
+                <span aria-hidden="true">&rsaquo;</span>
             </a>
         </li>
         <li class="page-item">
