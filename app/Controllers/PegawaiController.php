@@ -93,20 +93,23 @@ class PegawaiController extends BaseController
             ]
         ]);
 
-        if(!$validInput) {
-            $validation = $this->validator;
-            return redirect()->to('pegawai')->withInput()->with('validation', $validation); // $validation ini akan digenerate sebagai data session
-        }
+        if (!$validInput) {
+        $validation = $this->validator;
+        return $this->response->setJSON(['success' => false, 'validation' => $validation]);
+    }
 
-        $data = [
-            'NO' => $this->request->getVar('no'),
-            'NAMA' => $this->request->getVar('nama'),
-            'NIP' => $this->request->getVar('nip'),
-            'TELP' => $this->request->getVar('telp'),
-            'ID_LEVEL' => $this->request->getVar('level'),
-        ];
-        $this->pegawaiModel->update($data['NO'], $data);
-        return redirect()->to('pegawai/')->with('success', 'Berhasil Ubah Data Pegawai');
+    $data = [
+        'NO' => $this->request->getVar('no'),
+        'NAMA' => $this->request->getVar('nama'),
+        'NIP' => $this->request->getVar('nip'),
+        'TELP' => $this->request->getVar('telp'),
+        'ID_LEVEL' => $this->request->getVar('level'),
+    ];
+    
+    $this->pegawaiModel->update($data['NO'], $data);
+
+    return $this->response->setJSON(['success' => true]);
+    
     }
 
    public function hapus($no)

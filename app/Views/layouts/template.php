@@ -39,7 +39,7 @@
                     <li>
                         <hr class="dropdown-divider" />
                     </li>
-                    <li><a class="dropdown-item" href="<?= site_url('login/logout'); ?>">Logout</a></li>
+                    <li><a class="dropdown-item" href="javascript:void(0);" onclick="confirmLogout()">Logout</a></li>
                 </ul>
             </li>
         </ul>
@@ -105,6 +105,26 @@
     <script src="<?= base_url() ?>/assets/js/datatables-simple-demo.js"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.28/dist/sweetalert2.all.min.js"></script>
+
+
+<script>
+    function confirmLogout() {
+        Swal.fire({
+            title: 'Logout',
+            text: 'Apakah yakin ingin Logout ?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Ya, logout',
+            cancelButtonText: 'Tidak'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Redirect to the logout URL
+                window.location.href = '<?= site_url('login/logout'); ?>';
+            }
+        });
+    }
+</script>
+
 
 <script>
     $(document).ready(function() {

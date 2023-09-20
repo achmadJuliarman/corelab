@@ -259,6 +259,54 @@
     });
 </script>
 
+<script>
+    $(document).ready(function () {
+        const updateSuccess = localStorage.getItem('updateSuccess');
+
+        if (updateSuccess === 'true') {
+            // Display SweetAlert notification
+            Swal.fire({
+                title: "Updated!",
+                text: "Data berhasil diubah.",
+                icon: "success"
+            });
+
+            // Clear the flag
+            localStorage.removeItem('updateSuccess');
+        }
+    });
+
+    // Function to handle the edit response
+    function handleEditResponse(response) {
+        if (response.success) {
+            // Set the flag to indicate update success
+            localStorage.setItem('updateSuccess', 'true');
+
+            // Page reloads here
+            window.location.reload();
+        } else {
+            Swal.fire({
+                title: "Error!",
+                text: "Gagal untuk update data.",
+                icon: "error"
+            });
+        }
+    }
+
+    // AJAX request to edit data
+    $('#modalUbah form').submit(function (e) {
+        e.preventDefault();
+        $.ajax({
+            type: 'POST',
+            url: '<?= base_url('pegawai/ubah') ?>',
+            data: $(this).serialize(),
+            dataType: 'json',
+            success: function(response) {
+                handleEditResponse(response);
+            }
+        });
+    });
+</script>
 
 <script>
 $(document).on('click', '#btn-hapus', function() {
@@ -272,7 +320,8 @@ $(document).on('click', '#btn-hapus', function() {
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
         cancelButtonColor: '#d33',
-        confirmButtonText: 'Ya, hapus data ini!'
+        confirmButtonText: 'Ya, hapus data ini!',
+        cancelButtonText: 'Tidak'
     }).then((result) => {
         if (result.isConfirmed) {
             const formAction = '<?= base_url('pegawai/hapus/') ?>' + no;

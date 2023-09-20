@@ -104,8 +104,12 @@
 
 
                                 <!--  -->
-                                <a href="" class="btn btn-danger btn-sm <?= session('ID_LEVEL') == 3 ? 'd-none' : '' ?>" data-bs-toggle="modal" data-bs-target="#modalHapus" data-sampel="<?= $c->SAMPEL_NUM ?>" data-no="<?= $c->No ?>" id="btn-hapus">
-                                    <i class="fas fa-trash-alt"></i>
+                              <!--  <a href="#" class="btn btn-danger btn-sm <?= session('ID_LEVEL') == 3 ? 'd-none' : '' ?>" data-bs-toggle="modal" data-bs-target="#modalHapus" data-sampel="<?= $c->SAMPEL_NUM ?>" data-no="<?= $c->No ?>" id="btn-hapus">
+                                <i class="fas fa-trash-alt"></i> -->
+
+                                 <a href="#" class="btn btn-danger btn-sm <?= session('ID_LEVEL') == 3 ? 'd-none' : '' ?>" data-sampel="<?= $c->SAMPEL_NUM ?>" data-no="<?= $c->No ?>" id="btn-hapus">
+                                <i class="fas fa-trash-alt"></i>
+                                </a>
                                 </a>
 
                             </td>
@@ -338,6 +342,33 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
+                <form id="hapusForm" method="post">
+                    <?= csrf_field() ?>
+                    <input type="hidden" name="_method" value="DELETE">
+                    <input type="hidden" name="no" id="no">
+                    <div class="mb-3">
+                        <label for="sampel_num">Sampel Num</label>
+                        <input type="text" name="sampel_num" id="sampel_num" class="form-control" required readonly>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-danger">YA</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- <div class="modal fade" id="modalHapus" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-danger text-white">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">
+                    <i class="fa-duotone fa-octagon-plus"></i>Yakin Hapus Data Berikut ?
+                </h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
                 <form action="<?= base_url('core/hapus') ?>" method="post">
                     <?= csrf_field() ?>
                     <div class="mb-3">
@@ -352,10 +383,9 @@
                     </div>
                 </form>
             </div>
-
         </div>
     </div>
-</div>
+</div> -->
 <!-- END MODAL HAPUS -->
 
 
@@ -401,14 +431,111 @@
 <!-- END MODAL BOX DETAIL -->
 
 <script>
-    // modal box hapus
+    const urlParams = new URLSearchParams(window.location.search);
+    const successParam = urlParams.get('success');
+
+    document.addEventListener('DOMContentLoaded', (event) => {
+        if (successParam === 'true') {
+            Swal.fire({
+                title: "Added!",
+                text: "Data berhasil ditambahkan.",
+                icon: "success"
+            });
+        }
+    });
+</script>
+
+<!-- <script>
+    $(document).ready(function () {
+        const updateSuccess = localStorage.getItem('updateSuccess');
+
+        if (updateSuccess === 'true') {
+            // Display SweetAlert notification
+            Swal.fire({
+                title: "Updated!",
+                text: "Data berhasil diubah.",
+                icon: "success"
+            });
+
+            // Clear the flag
+            localStorage.removeItem('updateSuccess');
+        }
+    });
+
+    // Function to handle the edit response
+    function handleEditResponse(response) {
+        if (response.success) {
+            // Set the flag to indicate update success
+            localStorage.setItem('updateSuccess', 'true');
+
+            // Page reloads here
+            window.location.reload();
+        } else {
+            Swal.fire({
+                title: "Error!",
+                text: "Gagal untuk update data.",
+                icon: "error"
+            });
+        }
+    }
+
+    // AJAX request to edit data
+    $('#modalUbah form').submit(function (e) {
+        e.preventDefault();
+        $.ajax({
+            type: 'POST',
+            url: '<?= base_url('core/ubah') ?>',
+            data: $(this).serialize(),
+            dataType: 'json',
+            success: function(response) {
+                handleEditResponse(response);
+            }
+        });
+    });
+</script> -->
+
+<script>
+
+//modal box hapus
+$(document).on('click', '#btn-hapus', function() {
+    const no = $(this).data('no');
+    const sampel = $(this).data('sampel');
+
+    Swal.fire({
+        title: 'Yakin ingin hapus data ini?',
+        text: "Data yang dihapus tidak akan kembali lagi",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Ya, hapus data ini!',
+        cancelButtonText: 'Tidak'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            const formAction = '<?= base_url('core/hapus/') ?>' + no;
+            $('#modalHapus form').attr('action', formAction);
+
+            // Submit the form
+            $('#modalHapus form').submit();
+
+            // Display SweetAlert2 notification for successful deletion
+            Swal.fire({
+                title: 'Deleted!',
+                text: 'Data berhasil dihapus.',
+                icon: 'success'
+            });
+        }
+    });
+});
+
+    /*// modal box hapus
     $(document).on('click', '#btn-hapus', function() {
         const no = $(this).data('no');
         const sampel = $(this).data('sampel');
 
         $('#modalHapus .modal-body #no').val(no);
         $('#modalHapus .modal-body #sampel_num').val(sampel);
-    });
+    });*/
 
     // modal box ubah
     $(document).on('click', '#btn-ubah', function() {

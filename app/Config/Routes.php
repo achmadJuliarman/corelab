@@ -30,6 +30,8 @@ $routes->get('/pegawai', 'PegawaiController::index', ['filter' => 'stayLogin']);
 $routes->post('/pegawai/tambah', 'PegawaiController::tambah');
 $routes->post('/pegawai/ubah', 'PegawaiController::ubah');
 $routes->delete('pegawai/hapus/(:num)', 'PegawaiController::hapus/$1');
+$routes->get('pegawai/index', 'PegawaiController::index');
+
 
 
 
@@ -38,7 +40,7 @@ $routes->delete('pegawai/hapus/(:num)', 'PegawaiController::hapus/$1');
 $routes->get('/core', 'CoreController::index', ['filter' => 'stayLogin']);
 $routes->post('/core/tambah', 'CoreController::tambah');
 $routes->post('/core/edit', 'CoreController::edit');
-$routes->delete('/core/hapus', 'CoreController::hapus');
+$routes->delete('core/hapus/(:num)', 'CoreController::hapus/$1');
 
 
 // ROUTE UNTUK DASHBOARD
