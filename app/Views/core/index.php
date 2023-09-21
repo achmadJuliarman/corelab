@@ -418,7 +418,19 @@
     $('#keywords').on('keyup', function(){
         const content = $('#core-ajax');
         const keywords = $(this).val();
-        content.load('ajax/core-search?keywords='+keywords);
+        $.ajax({
+            url: "<?= base_url('core/cari') ?>",
+            type: "GET",
+            data: {
+                keywords: keywords
+            },
+            success : function(data){
+                content.html(data)
+            }
+            
+        })
+        // content.load('hello berhasil');
+        // content.load(<?= base_url() ?>+'ajax/core-search?keywords='+keywords);
     });
 </script>
 <!-- END LIVE SEARCH AJAX -->

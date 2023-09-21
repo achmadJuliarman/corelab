@@ -18,4 +18,25 @@ class CoreModel extends Model
     // protected $createdField  = 'created_at';
     // protected $updatedField  = 'updated_at';
 
+    public function search($keywords)
+    {
+
+        $db = \Config\Database::connect();
+        $query = $db->query("SELECT * FROM db_corestorage2007 
+            WHERE SHIP LIKE '%$keywords%' 
+            OR CRUISE_ LIKE '%$keywords%' 
+            OR SAMPEL_NUM LIKE '%$keywords%' 
+            OR DEVICE LIKE '%$keywords%' 
+            OR DATE LIKE '%$keywords%'  
+            OR DEPTH LIKE '%$keywords%' 
+            OR SED_TYPE LIKE '%$keywords%' 
+            OR REMARK LIKE '%$keywords%' 
+            OR VOL LIKE '%$keywords%' 
+            OR LATITUDE LIKE '%$keywords%' 
+            OR LONGITUDE LIKE '%$keywords%' 
+            ")->getResultObject();
+
+        return $query;
+    }
+
 }

@@ -129,10 +129,44 @@ class CoreController extends BaseController
     }
 
     public function cari(){
-        $data = [
-            'keywords' => $this->request->getVar('keywords')
-        ];
-        $this->load->view('core/ajax/core-search');
+        
+        $keywords = $this->request->getVar('keywords');
+        $output = '<table class="table table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th>NO</th>
+                            <th>SHIP</th>
+                            <th>Cruies</th>
+                            <th>Sampel Number</th>
+                            <th>Date</th>
+                            <th>Depth</th>
+                            <th>Length</th>
+                            <th>Location</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>';
+        if($keywords != ''){
+            $data = $this->coreModel->search($keywords);
+            if(!empty($data)){
+                foreach($data as $d){
+                    $output .='<tr>
+                    <td>'.$d->No.'</td>
+                    <td>'.$d->SHIP.'</td>
+                    <td>'.$d->CRUISE_.'</td>
+                    <td>'.$d->SAMPEL_NUM.'</td>
+                    <td>'.$d->CRUISE_.'</td>
+                    <td>'.$d->DEPTH.'</td>
+                    <td>'.$d->LENGTH.'</td>
+                    <td>'.$d->LOCATION.'</td></tr>';
+                }
+            $output .= '</tbody></table>';
+            }else{
+                $output .= 'Match Not Found';
+            }
+            echo $output;
+        }
+
     }
     // METHOD - METHOD UNTUK EXPORT DATA PEGAWAI MENJADI BERBAGAI FORMAT FILE
     public function exportexcel()
