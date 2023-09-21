@@ -83,7 +83,7 @@
                                     <l class="fas fa-edit"></l>
                                 </a>
 
-                                <a href="#" class="btn btn-danger btn-sm" data-nama="<?= $p->NAMA ?>" data-no="<?= $p->NO ?>" id="btn-hapus">
+                                <a href="#" class="btn btn-danger btn-sm <?= (session('NO') == $p->NO) ? 'd-none' : '' ?>" data-nama="<?= $p->NAMA ?>" data-no="<?= $p->NO ?>" id="btn-hapus">
                                 <i class="fas fa-trash-alt"></i>
                                 </a>
                                <!--  <a href="" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#modalHapus" data-nama="<?= $p->NAMA ?>" data-no="<?= $p->NO ?>" id="btn-hapus">

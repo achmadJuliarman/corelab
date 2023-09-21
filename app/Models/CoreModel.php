@@ -34,6 +34,7 @@ class CoreModel extends Model
             OR VOL LIKE '%$keywords%' 
             OR LATITUDE LIKE '%$keywords%' 
             OR LONGITUDE LIKE '%$keywords%' 
+            OR LOCATION LIKE '%$keywords%'
             ")->getResultObject();
 
         return $query;

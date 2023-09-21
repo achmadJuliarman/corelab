@@ -68,101 +68,55 @@ class CoreController extends BaseController
         return redirect()->to('core/')->with('success', 'Berhasil Tambah Data CORE');
     }
 
-public function edit()
-{
-    $no = $this->request->getVar('no');
-    $fotoName = $this->request->getVar('foto-lama'); // Default to the old image name
-
-    // Check if a new image is uploaded
-    if ($this->request->getFile('foto')->getError() !== 4) {
-        $fotoSpesimen = $this->request->getFile('foto');
-        $fotoName = $fotoSpesimen->getRandomName();
-        $fotoSpesimen->move(ROOTPATH . 'public/assets/img', $fotoName);
-
-        // Remove old image if it's not the default image
-        $fotoLama = $this->coreModel->find($no);
-        if ($fotoLama->FOTO_SPESIMEN != 'default.png') {
-            unlink('assets/img/' . $fotoLama->FOTO_SPESIMEN);
-        }
-    }
-
-   $data = [
-            'SHIP' => $this->request->getVar('ship'),
-            'CRUISE_' => $this->request->getVar('cruise'),
-            'SAMPEL_NUM' => $this->request->getVar('sampel_num'),
-            'DEVICE' => $this->request->getVar('device'),
-            'SUM' => $this->request->getVar('sum'),
-            'DATE' => $this->request->getVar('date'),
-            'DEPTH' => $this->request->getVar('depth'),
-            'LENGTH' => $this->request->getVar('length'),
-            'LOCATION' => $this->request->getVar('location'),
-            'SED_TYPE' => $this->request->getVar('sed_type'),
-            'STORAGE' => $this->request->getVar('storage'),
-            'REMARK' => $this->request->getVar('remark'),
-            'VOL' => $this->request->getVar('vol'),
-            'LATITUDE' => $this->request->getVar('latitude'),
-            'LONGITUDE' => $this->request->getVar('longitude'),
-            'FOTO_SPESIMEN' => $fotoName
-        ];
-
-    // Update the data in the database
-    $success = $this->coreModel->update($no, $data);
-
-    if ($success) {
-        // Return a JSON response indicating success
-        return $this->response->setJSON(['success' => true]);
-    } else {
-        // Return a JSON response indicating error
-        return $this->response->setJSON(['success' => false]);
-    }
-}
-
-   /* public function edit()
+    public function edit()
     {
-        // cek apakah foto baru ada ?
+        $no = $this->request->getVar('no');
+        $fotoName = $this->request->getVar('foto-lama'); // Default to the old image name
+
+        // Check if a new image is uploaded
         if ($this->request->getFile('foto')->getError() !== 4) {
-            // ambil file foto spesimen
             $fotoSpesimen = $this->request->getFile('foto');
             $fotoName = $fotoSpesimen->getRandomName();
             $fotoSpesimen->move(ROOTPATH . 'public/assets/img', $fotoName);
 
-            // hapus foto lama
-            // cari gambar berdasarkan id
-            $no = $this->request->getVar('no');
-            $foto_lama = $this->coreModel->find($no);
-
-            dd('gambar ada');
-            // hapus gambar 
-            if ($foto_lama != 'default.png') {
-                unlink('assets/img/' . $foto_lama->FOTO_SPESIMEN);
+            // Remove old image if it's not the default image
+            $fotoLama = $this->coreModel->find($no);
+            if ($fotoLama->FOTO_SPESIMEN != 'default.png') {
+                unlink('assets/img/' . $fotoLama->FOTO_SPESIMEN);
             }
-        } else {
-            $fotoName = $this->request->getVar('foto-lama');
         }
 
-        $no = $this->request->getVar('no');
-        $data = [
-            'SHIP' => $this->request->getVar('ship'),
-            'CRUISE_' => $this->request->getVar('cruise'),
-            'SAMPEL_NUM' => $this->request->getVar('sampel_num'),
-            'DEVICE' => $this->request->getVar('device'),
-            'SUM' => $this->request->getVar('sum'),
-            'DATE' => $this->request->getVar('date'),
-            'DEPTH' => $this->request->getVar('depth'),
-            'LENGTH' => $this->request->getVar('length'),
-            'LOCATION' => $this->request->getVar('location'),
-            'SED_TYPE' => $this->request->getVar('sed_type'),
-            'STORAGE' => $this->request->getVar('storage'),
-            'REMARK' => $this->request->getVar('remark'),
-            'VOL' => $this->request->getVar('vol'),
-            'LATITUDE' => $this->request->getVar('latitude'),
-            'LONGITUDE' => $this->request->getVar('longitude'),
-            'FOTO_SPESIMEN' => $fotoName
-        ];
+       $data = [
+                'SHIP' => $this->request->getVar('ship'),
+                'CRUISE_' => $this->request->getVar('cruise'),
+                'SAMPEL_NUM' => $this->request->getVar('sampel_num'),
+                'DEVICE' => $this->request->getVar('device'),
+                'SUM' => $this->request->getVar('sum'),
+                'DATE' => $this->request->getVar('date'),
+                'DEPTH' => $this->request->getVar('depth'),
+                'LENGTH' => $this->request->getVar('length'),
+                'LOCATION' => $this->request->getVar('location'),
+                'SED_TYPE' => $this->request->getVar('sed_type'),
+                'STORAGE' => $this->request->getVar('storage'),
+                'REMARK' => $this->request->getVar('remark'),
+                'VOL' => $this->request->getVar('vol'),
+                'LATITUDE' => $this->request->getVar('latitude'),
+                'LONGITUDE' => $this->request->getVar('longitude'),
+                'FOTO_SPESIMEN' => $fotoName
+            ];
 
-        $this->coreModel->update($no, $data);
-        return redirect()->to('core/')->with('success', 'Berhasil Edit Data CORE');
-    }*/
+        // Update the data in the database
+        $success = $this->coreModel->update($no, $data);
+
+        if ($success) {
+            // Return a JSON response indicating success
+            return $this->response->setJSON(['success' => true]);
+        } else {
+            // Return a JSON response indicating error
+            return $this->response->setJSON(['success' => false]);
+        }
+    }
+
 
     public function hapus()
     {
@@ -199,15 +153,64 @@ public function edit()
             $data = $this->coreModel->search($keywords);
             if(!empty($data)){
                 foreach($data as $d){
-                    $output .='<tr>
-                    <td>'.$d->No.'</td>
-                    <td>'.$d->SHIP.'</td>
-                    <td>'.$d->CRUISE_.'</td>
-                    <td>'.$d->SAMPEL_NUM.'</td>
-                    <td>'.$d->CRUISE_.'</td>
-                    <td>'.$d->DEPTH.'</td>
-                    <td>'.$d->LENGTH.'</td>
-                    <td>'.$d->LOCATION.'</td></tr>';
+                    // jika bukan guest
+                    if(session('ID_LEVEL') != 3){
+                        $output .='<tr>
+                        <td>'.$d->No.'</td>
+                        <td>'.$d->SHIP.'</td>
+                        <td>'.$d->CRUISE_.'</td>
+                        <td>'.$d->SAMPEL_NUM.'</td>
+                        <td>'.$d->CRUISE_.'</td>
+                        <td>'.$d->DEPTH.'</td>
+                        <td>'.$d->LENGTH.'</td>
+                        <td>'.$d->LOCATION.'</td>
+                        <td>
+                        <a href="#" class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#modalDetail" id="btn-detail"
+                        data-sampel="'.$d->SAMPEL_NUM.'" data-no="'.$d->No.'" data-ship="'.$d->SHIP.'" 
+                        data-cruise="'.$d->CRUISE_.'" data-device="'.$d->DEVICE.'" data-sum="'.$d->SUM.'" 
+                        data-date="'.$d->DATE.'" data-depth="'.$d->DEPTH.'" data-length="'.$d->LENGTH.'" 
+                        data-location="'.$d->LOCATION.'" data-sed="'.$d->SED_TYPE.'" data-storage="'.$d->STORAGE.'" 
+                        data-remark="'.$d->REMARK.'" data-vol="'.$d->VOL.'" data-latitude="'.$d->LATITUDE.'" 
+                        data-longitude="'.$d->LONGITUDE.'" data-foto="'.$d->FOTO_SPESIMEN.'" >
+                            <i class="fa-solid fa-eye"></i>
+                        </a>
+                        <a href="#" class="btn btn-outline-success btn-sm" data-bs-toggle="modal" data-bs-target="#modalUbah" id="btn-ubah"
+                        data-sampel="'.$d->SAMPEL_NUM.'" data-no="'.$d->No.'" data-ship="'.$d->SHIP.'" 
+                        data-cruise="'.$d->CRUISE_.'" data-device="'.$d->DEVICE.'" data-sum="'.$d->SUM.'" 
+                        data-date="'.$d->DATE.'" data-depth="'.$d->DEPTH.'" data-length="'.$d->LENGTH.'" 
+                        data-location="'.$d->LOCATION.'" data-sed="'.$d->SED_TYPE.'" data-storage="'.$d->STORAGE.'" 
+                        data-remark="'.$d->REMARK.'" data-vol="'.$d->VOL.'" data-latitude="'.$d->LATITUDE.'" 
+                        data-longitude="'.$d->LONGITUDE.'" data-foto="'.$d->FOTO_SPESIMEN.'" >
+                            <l class="fas fa-edit"></l>
+                        </a>
+                        <a href="#" class="btn btn-danger btn-sm" data-sampel="'.$d->SAMPEL_NUM.'" data-no="'.$d->No.'" id="btn-hapus">
+                        <i class="fas fa-trash-alt"></i>
+                        </a>
+                        </td></tr>';
+                    }else{
+                        // jika guest
+                        $output .='<tr>
+                        <td>'.$d->No.'</td>
+                        <td>'.$d->SHIP.'</td>
+                        <td>'.$d->CRUISE_.'</td>
+                        <td>'.$d->SAMPEL_NUM.'</td>
+                        <td>'.$d->CRUISE_.'</td>
+                        <td>'.$d->DEPTH.'</td>
+                        <td>'.$d->LENGTH.'</td>
+                        <td>'.$d->LOCATION.'</td>
+                        <td>
+                        <a href="#" class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#modalDetail" id="btn-detail"
+                        data-sampel="'.$d->SAMPEL_NUM.'" data-no="'.$d->No.'" data-ship="'.$d->SHIP.'" 
+                        data-cruise="'.$d->CRUISE_.'" data-device="'.$d->DEVICE.'" data-sum="'.$d->SUM.'" 
+                        data-date="'.$d->DATE.'" data-depth="'.$d->DEPTH.'" data-length="'.$d->LENGTH.'" 
+                        data-location="'.$d->LOCATION.'" data-sed="'.$d->SED_TYPE.'" data-storage="'.$d->STORAGE.'" 
+                        data-remark="'.$d->REMARK.'" data-vol="'.$d->VOL.'" data-latitude="'.$d->LATITUDE.'" 
+                        data-longitude="'.$d->LONGITUDE.'" data-foto="'.$d->FOTO_SPESIMEN.'" >
+                            <i class="fa-solid fa-eye"></i>
+                        </a>
+                        </tr>';
+                    }
+                    
                 }
             $output .= '</tbody></table>';
             }else{
