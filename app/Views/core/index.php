@@ -438,54 +438,43 @@
     });
 </script>
 
-<!-- <script>
+
+ <script>
     $(document).ready(function () {
-        const updateSuccess = localStorage.getItem('updateSuccess');
+        $('#modalUbah form').submit(function (e) {
+            e.preventDefault();
 
-        if (updateSuccess === 'true') {
-            // Display SweetAlert notification
-            Swal.fire({
-                title: "Updated!",
-                text: "Data berhasil diubah.",
-                icon: "success"
+            $.ajax({
+                type: 'POST',
+                url: '<?= base_url('core/edit') ?>',
+                data: new FormData(this),  // Use FormData to send form including files
+                processData: false,
+                contentType: false,
+                dataType: 'json',
+                success: function(response) {
+                    if (response.success) {
+                        // Display success notification
+                        Swal.fire({
+                            title: "Updated!",
+                            text: "Data berhasil diubah.",
+                            icon: "success"
+                        }).then(function() {
+                            // Reload the page or do any other actions
+                            window.location.reload();
+                        });
+                    } else {
+                        Swal.fire({
+                            title: "Error!",
+                            text: "Gagal untuk update data.",
+                            icon: "error"
+                        });
+                    }
+                }
             });
-
-            // Clear the flag
-            localStorage.removeItem('updateSuccess');
-        }
-    });
-
-    // Function to handle the edit response
-    function handleEditResponse(response) {
-        if (response.success) {
-            // Set the flag to indicate update success
-            localStorage.setItem('updateSuccess', 'true');
-
-            // Page reloads here
-            window.location.reload();
-        } else {
-            Swal.fire({
-                title: "Error!",
-                text: "Gagal untuk update data.",
-                icon: "error"
-            });
-        }
-    }
-
-    // AJAX request to edit data
-    $('#modalUbah form').submit(function (e) {
-        e.preventDefault();
-        $.ajax({
-            type: 'POST',
-            url: '<?= base_url('core/ubah') ?>',
-            data: $(this).serialize(),
-            dataType: 'json',
-            success: function(response) {
-                handleEditResponse(response);
-            }
         });
     });
-</script> -->
+</script> 
+
 
 <script>
 
