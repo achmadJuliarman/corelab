@@ -13,7 +13,7 @@ class StayCore implements FilterInterface
         $id_level = session()->get('ID_LEVEL');
 
         // dd($id_level);
-        // Cek jika pengguna adalah admin (ID_LEVEL 1 atau pimpinan (ID_LEVEL 2))
+        // Cek jika pengguna adalah admin (ID_LEVEL 1 atau pimpinan (ID_LEVEL 3))
         if ($id_level == 1 || $id_level == 3) {
             return;
         } else {

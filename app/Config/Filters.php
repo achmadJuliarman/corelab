@@ -27,7 +27,6 @@ class Filters extends BaseConfig
         'stayPegawai'   => \App\Filters\StayPegawai::class,
         'stayDashboard' => \App\Filters\StayDashboard::class, \App\Filters\StayLogin::class,
         'stayCore'      => \App\Filters\StayCore::class,
-        'newFilter'     => \App\Filters\NewFilter::class,
         'invalidchars'  => InvalidChars::class,
         'secureheaders' => SecureHeaders::class,
     ];

@@ -14,7 +14,7 @@ class StayPegawai implements FilterInterface
         $id_level = session()->get('ID_LEVEL');
 
         // dd($id_level);
-        // Cek jika pengguna adalah admin (ID_LEVEL 1 atau pimpinan (ID_LEVEL 2))
+        // Cek jika pengguna adalah admin (ID_LEVEL 1)
         if ($id_level == 1) {
             return;
         } else {
