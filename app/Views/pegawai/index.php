@@ -42,10 +42,11 @@
     <a onclick="window.open(this.href,'_blank'); return false;" href="<?= site_url('pegawai/exportpdf') ?>" class="btn btn-warning mb-3">
         <i class="fa-solid fa-file-pdf"></i> Export PDF
     </a>
-
-
-
     <!-- END BUTTON MODAL TAMBAH -->
+
+    <div class="total">
+        <h4>Total Data : <span class="badge text-bg-info"><?= $total ?></span></h4>
+    </div>
     <div class="card mb-4">
         <div class="card-header">
             <i class="fas fa-table me-1"></i>

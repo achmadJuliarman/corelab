@@ -16,8 +16,8 @@ class CoreController extends BaseController
             "sub_menu" => "data-core",
             "core" => $this->coreModel->paginate(25, 'core'),
             "pager" => $this->coreModel->pager,
+            "total" => $this->coreModel->countAllResults()
         ];
-        // dd($data['core']);
         return view('core/index', $data);
     }
 

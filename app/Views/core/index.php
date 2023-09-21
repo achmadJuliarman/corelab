@@ -49,12 +49,23 @@
 
 
     <!-- END TRIGGER -->
+    <div class="total">
+        <h4>Total Data : <span class="badge text-bg-info"><?= $total ?></span></h4>
+    </div>
     <div class="card mb-4">
         <div class="card-body">
             <div class="input-group mb-3 mx-2 search">
                 <div class="row">
-                    <input type="text" class="form-control col-md-2" placeholder="Cari Disini .." aria-label="Recipient's username" aria-describedby="button-addon2" id="keywords">
+                    <div class="col-md-8">
+                        <input type="text" class="form-control col-md-2" placeholder="Cari Disini .." aria-label="Recipient's username" aria-describedby="button-addon2" id="keywords">
+                    </div>
+                    <div class="col">
+                        <div class="spinner-border text-primary d-none" role="status" id="loader"> 
+                          <span class="visually-hidden">Loading...</span>
+                        </div>
+                    </div>  
                 </div>
+
             </div>
             <div id="core-ajax">
             <table class="table table-striped table-hover">
@@ -418,6 +429,8 @@
     $('#keywords').on('keyup', function(){
         const content = $('#core-ajax');
         const keywords = $(this).val();
+        $('#loader').removeClass("d-none");
+
         $.ajax({
             url: "<?= base_url('core/cari') ?>",
             type: "GET",
@@ -426,11 +439,12 @@
             },
             success : function(data){
                 content.html(data)
+                content.children().ready(function(){
+                    $('#loader').hide();
+                })
             }
             
         })
-        // content.load('hello berhasil');
-        // content.load(<?= base_url() ?>+'ajax/core-search?keywords='+keywords);
     });
 </script>
 <!-- END LIVE SEARCH AJAX -->

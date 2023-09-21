@@ -14,7 +14,8 @@ class PegawaiController extends BaseController
             "title" => "Pegawai",
             "sub_menu" => "data-pegawai",
             "pegawai" => $this->pegawaiModel->orderBy('NO', 'DESC')->findAll(),
-            "levels" => $this->userLevelModel->findAll()
+            "levels" => $this->userLevelModel->findAll(),
+            "total" => $this->pegawaiModel->countAllResults()
         ];
         // dd($data['pegawai']);
         return view('pegawai/index', $data);
