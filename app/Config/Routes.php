@@ -20,8 +20,8 @@ $routes->get('/login/logout', 'LoginController::logout');
 $routes->get('/user', 'UserController::index');
 
 
-
-
+//ROUTE UNTUK ERROR
+$routes->get('/error-page', 'ErrorController::index');
 
 
 
@@ -46,7 +46,7 @@ $routes->get('core/ajax/core-search', 'CoreController::cari');
 
 
 // ROUTE UNTUK DASHBOARD
-$routes->get('/dashboard', 'PagesController::index', ['filter' => 'stayLogin']);
+$routes->get('/dashboard', 'PagesController::index', ['filter' => 'stayDashboard']);
 
 
 

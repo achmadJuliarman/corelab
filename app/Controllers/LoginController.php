@@ -78,6 +78,10 @@ class LoginController extends BaseController
             'isLoggedIn' => true,
         ];
 
+        // Tambahkan ini untuk debugging
+        echo 'ID_LEVEL yang diatur: ' . $user->ID_LEVEL;
+        var_dump($data);
+
         session()->set($data);
         return true;
     }
