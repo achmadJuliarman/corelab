@@ -50,12 +50,14 @@
 
     <!-- END TRIGGER -->
     <div class="card mb-4">
-        <div class="card-header">
-            <i class="fas fa-table me-1"></i>
-            Table Core
-        </div>
         <div class="card-body">
-            <table id="datatablesSimple">
+            <div class="input-group mb-3 mx-2 search">
+                <div class="row">
+                    <input type="text" class="form-control col-md-2" placeholder="Cari Disini .." aria-label="Recipient's username" aria-describedby="button-addon2" id="keywords">
+                </div>
+            </div>
+            <div id="core-ajax">
+            <table class="table table-striped table-hover">
                 <thead>
                     <tr>
                         <th>NO</th>
@@ -69,19 +71,6 @@
                         <th>Action</th>
                     </tr>
                 </thead>
-                <tfoot>
-                    <tr>
-                        <th>No</th>
-                        <th>Ship</th>
-                        <th>Cruise</th>
-                        <th>Sample Number</th>
-                        <th>Date</th>
-                        <th>Depth</th>
-                        <th>Length</th>
-                        <th>Location</th>
-                        <th>Action</th>
-                    </tr>
-                </tfoot>
                 <tbody>
                     <?php foreach ($core as $c) : ?>
                         <tr>
@@ -117,6 +106,7 @@
                     <?php endforeach; ?>
                 </tbody>
             </table>
+            </div>
             <!-- links('nama tabel', 'nama file pagination') -->
             <!-- nama table ini diambil sesuai dengan yang dikirimkan di controller didalam parameter paginate() -->
             <?= $pager->links('core', 'core_pagination') ?>
@@ -422,6 +412,17 @@
 </div>
 <!-- END MODAL BOX DETAIL -->
 
+<!-- LIVE SEARCH AJAX -->
+<script>
+    // SEARCH EVENt
+    $('#keywords').on('keyup', function(){
+        const content = $('#core-ajax');
+        const keywords = $(this).val();
+        content.load('ajax/core-search?keywords='+keywords);
+    });
+</script>
+<!-- END LIVE SEARCH AJAX -->
+
 <script>
     const urlParams = new URLSearchParams(window.location.search);
     const successParam = urlParams.get('success');
@@ -487,6 +488,7 @@
 </script> -->
 
 <script>
+
 
 //modal box hapus
 $(document).on('click', '#btn-hapus', function() {

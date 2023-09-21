@@ -128,6 +128,12 @@ class CoreController extends BaseController
         return redirect()->to('core/')->with('success', 'Berhasil Hapus Data CORE');
     }
 
+    public function cari(){
+        $data = [
+            'keywords' => $this->request->getVar('keywords')
+        ];
+        $this->load->view('core/ajax/core-search');
+    }
     // METHOD - METHOD UNTUK EXPORT DATA PEGAWAI MENJADI BERBAGAI FORMAT FILE
     public function exportexcel()
     {
