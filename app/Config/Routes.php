@@ -7,7 +7,7 @@ use CodeIgniter\Router\RouteCollection;
  */
 
 // ROUTE UNTUK LOGIN
-$routes->get('/login', 'LoginController::index', ['filter' => 'stayPegawai']);
+$routes->get('/login', 'LoginController::index');
 $routes->get('/', 'LoginController::index');
 $routes->get('/login', 'LoginController::index');
 $routes->post('/', 'LoginController::index');
@@ -26,7 +26,7 @@ $routes->get('/error-page', 'ErrorController::index');
 
 
 // ROUTE UNTUK PEGAWAI
-$routes->get('/pegawai', 'PegawaiController::index', ['filter' => 'stayLogin']);
+$routes->get('/pegawai', 'PegawaiController::index', ['filter' => 'stayPegawai']);
 $routes->post('/pegawai/tambah', 'PegawaiController::tambah');
 $routes->post('/pegawai/ubah', 'PegawaiController::ubah');
 $routes->delete('pegawai/hapus/(:num)', 'PegawaiController::hapus/$1');
@@ -37,7 +37,7 @@ $routes->get('pegawai/index', 'PegawaiController::index');
 
 
 // ROUTE UNTUK CORE
-$routes->get('/core', 'CoreController::index', ['filter' => 'stayLogin']);
+$routes->get('/core', 'CoreController::index', ['filter' => 'stayCore']);
 $routes->post('/core/tambah', 'CoreController::tambah');
 $routes->post('/core/edit', 'CoreController::edit');
 $routes->delete('core/hapus/(:num)', 'CoreController::hapus/$1');
@@ -46,6 +46,8 @@ $routes->get('core/old_index', 'CoreController::old_index');
 
 // ROUTE UNTUK DASHBOARD
 $routes->get('/dashboard', 'PagesController::index', ['filter' => 'stayDashboard']);
+
+
 
 
 
