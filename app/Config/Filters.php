@@ -25,6 +25,8 @@ class Filters extends BaseConfig
         'honeypot'      => Honeypot::class,
         'stayLogin'     => \App\Filters\StayLogin::class,
         'stayPegawai'   => \App\Filters\StayPegawai::class,
+        'stayDashboard' => \App\Filters\StayDashboard::class,
+        'stayCore'      => \App\Filters\StayCore::class,
         'invalidchars'  => InvalidChars::class,
         'secureheaders' => SecureHeaders::class,
     ];
