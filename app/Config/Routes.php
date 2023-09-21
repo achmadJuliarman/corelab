@@ -7,7 +7,7 @@ use CodeIgniter\Router\RouteCollection;
  */
 
 // ROUTE UNTUK LOGIN
-$routes->get('/login', 'LoginController::index');
+$routes->get('/login', 'LoginController::index', ['filter' => 'stayLogin']);
 $routes->get('/', 'LoginController::index');
 $routes->get('/login', 'LoginController::index');
 $routes->post('/', 'LoginController::index');
