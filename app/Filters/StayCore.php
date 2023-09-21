@@ -9,13 +9,16 @@ class StayCore implements FilterInterface
 {
     public function before(RequestInterface $request, $arguments = null)
     {
-        // Periksa apakah pengguna masuk dan memiliki ID_LEVEL 3 (guest)
-        if (session()->get('isLoggedIn') && session()->get('ID_LEVEL') == 3) {
-            // Pengguna memiliki akses ke core, biarkan mereka lanjut
+        // Ambil ID_LEVEL pengguna dari sesi
+        $id_level = session()->get('ID_LEVEL');
+
+        // dd($id_level);
+        // Cek jika pengguna adalah admin (ID_LEVEL 1 atau pimpinan (ID_LEVEL 3))
+        if ($id_level == 1 || $id_level == 3) {
             return;
         } else {
-            // Pengguna tidak memiliki akses ke core, arahkan mereka ke halaman lain
-            return redirect()->to('/'); // Ganti dengan halaman yang sesuai
+            // Pengguna bukan admin atau pimpinan, arahkan mereka ke halaman pesan kesalahan
+            return redirect()->to('/error-page');
         }
     }
 
