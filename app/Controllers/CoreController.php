@@ -132,92 +132,25 @@ class CoreController extends BaseController
     }
 
     public function cari(){
-        
-        $keywords = $this->request->getVar('keywords');
-        $output = '<table class="table table-striped table-hover">
-                    <thead>
-                        <tr>
-                            <th>NO</th>
-                            <th>SHIP</th>
-                            <th>Cruies</th>
-                            <th>Sampel Number</th>
-                            <th>Date</th>
-                            <th>Depth</th>
-                            <th>Length</th>
-                            <th>Location</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>';
-        if($keywords != ''){
-            $data = $this->coreModel->search($keywords);
-            if(!empty($data)){
-                foreach($data as $d){
-                    // jika bukan guest
-                    if(session('ID_LEVEL') != 3){
-                        $output .='<tr>
-                        <td>'.$d->No.'</td>
-                        <td>'.$d->SHIP.'</td>
-                        <td>'.$d->CRUISE_.'</td>
-                        <td>'.$d->SAMPEL_NUM.'</td>
-                        <td>'.$d->CRUISE_.'</td>
-                        <td>'.$d->DEPTH.'</td>
-                        <td>'.$d->LENGTH.'</td>
-                        <td>'.$d->LOCATION.'</td>
-                        <td>
-                        <a href="#" class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#modalDetail" id="btn-detail"
-                        data-sampel="'.$d->SAMPEL_NUM.'" data-no="'.$d->No.'" data-ship="'.$d->SHIP.'" 
-                        data-cruise="'.$d->CRUISE_.'" data-device="'.$d->DEVICE.'" data-sum="'.$d->SUM.'" 
-                        data-date="'.$d->DATE.'" data-depth="'.$d->DEPTH.'" data-length="'.$d->LENGTH.'" 
-                        data-location="'.$d->LOCATION.'" data-sed="'.$d->SED_TYPE.'" data-storage="'.$d->STORAGE.'" 
-                        data-remark="'.$d->REMARK.'" data-vol="'.$d->VOL.'" data-latitude="'.$d->LATITUDE.'" 
-                        data-longitude="'.$d->LONGITUDE.'" data-foto="'.$d->FOTO_SPESIMEN.'" >
-                            <i class="fa-solid fa-eye"></i>
-                        </a>
-                        <a href="#" class="btn btn-outline-success btn-sm" data-bs-toggle="modal" data-bs-target="#modalUbah" id="btn-ubah"
-                        data-sampel="'.$d->SAMPEL_NUM.'" data-no="'.$d->No.'" data-ship="'.$d->SHIP.'" 
-                        data-cruise="'.$d->CRUISE_.'" data-device="'.$d->DEVICE.'" data-sum="'.$d->SUM.'" 
-                        data-date="'.$d->DATE.'" data-depth="'.$d->DEPTH.'" data-length="'.$d->LENGTH.'" 
-                        data-location="'.$d->LOCATION.'" data-sed="'.$d->SED_TYPE.'" data-storage="'.$d->STORAGE.'" 
-                        data-remark="'.$d->REMARK.'" data-vol="'.$d->VOL.'" data-latitude="'.$d->LATITUDE.'" 
-                        data-longitude="'.$d->LONGITUDE.'" data-foto="'.$d->FOTO_SPESIMEN.'" >
-                            <l class="fas fa-edit"></l>
-                        </a>
-                        <a href="#" class="btn btn-danger btn-sm" data-sampel="'.$d->SAMPEL_NUM.'" data-no="'.$d->No.'" id="btn-hapus">
-                        <i class="fas fa-trash-alt"></i>
-                        </a>
-                        </td></tr>';
-                    }else{
-                        // jika guest
-                        $output .='<tr>
-                        <td>'.$d->No.'</td>
-                        <td>'.$d->SHIP.'</td>
-                        <td>'.$d->CRUISE_.'</td>
-                        <td>'.$d->SAMPEL_NUM.'</td>
-                        <td>'.$d->CRUISE_.'</td>
-                        <td>'.$d->DEPTH.'</td>
-                        <td>'.$d->LENGTH.'</td>
-                        <td>'.$d->LOCATION.'</td>
-                        <td>
-                        <a href="#" class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#modalDetail" id="btn-detail"
-                        data-sampel="'.$d->SAMPEL_NUM.'" data-no="'.$d->No.'" data-ship="'.$d->SHIP.'" 
-                        data-cruise="'.$d->CRUISE_.'" data-device="'.$d->DEVICE.'" data-sum="'.$d->SUM.'" 
-                        data-date="'.$d->DATE.'" data-depth="'.$d->DEPTH.'" data-length="'.$d->LENGTH.'" 
-                        data-location="'.$d->LOCATION.'" data-sed="'.$d->SED_TYPE.'" data-storage="'.$d->STORAGE.'" 
-                        data-remark="'.$d->REMARK.'" data-vol="'.$d->VOL.'" data-latitude="'.$d->LATITUDE.'" 
-                        data-longitude="'.$d->LONGITUDE.'" data-foto="'.$d->FOTO_SPESIMEN.'" >
-                            <i class="fa-solid fa-eye"></i>
-                        </a>
-                        </tr>';
-                    }
-                    
-                }
-            $output .= '</tbody></table>';
-            }else{
-                $output .= 'Match Not Found';
-            }
-            echo $output;
-        }
+        // DATATABLE (SERVER SIDE)
+        // REFERENSI https://www.youtube.com/watch?v=Kt6rnX8J37A
+        $param['draw'] = !empty($_REQUEST['draw']) ? $_REQUEST['draw'] : ''; 
+        $keywords = !empty($_REQUEST['search']['value']) ? $_REQUEST['search']['value'] : '';
+        $start = !empty($_REQUEST['start']) ? $_REQUEST['start'] : '';
+        $length = !empty($_REQUEST['length']) ? $_REQUEST['length'] : '';
+
+
+        $data = $this->coreModel->tampilDataAjax($keywords, intVal($start), intVal($length));
+
+        $jumlahData = $this->coreModel->tampilDataAjax($keywords);
+
+        $output = array(
+            "draw" => intVal($param['draw']),
+            "recordsTotal" => count($jumlahData),
+            "recordsFiltered" => count($jumlahData),
+            "data" => $data
+        );
+        echo json_encode($output);
 
     }
 

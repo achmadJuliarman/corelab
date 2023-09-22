@@ -107,8 +107,8 @@
                               <!--  <a href="#" class="btn btn-danger btn-sm <?= session('ID_LEVEL') == 3 ? 'd-none' : '' ?>" data-bs-toggle="modal" data-bs-target="#modalHapus" data-sampel="<?= $c->SAMPEL_NUM ?>" data-no="<?= $c->No ?>" id="btn-hapus">
                                 <i class="fas fa-trash-alt"></i> -->
 
-                                 <a href="#" class="btn btn-danger btn-sm <?= session('ID_LEVEL') == 3 ? 'd-none' : '' ?>" data-sampel="<?= $c->SAMPEL_NUM ?>" data-no="<?= $c->No ?>" id="btn-hapus">
-                                <i class="fas fa-trash-alt"></i>
+                                <a href="#" class="btn btn-danger btn-sm <?= session('ID_LEVEL') == 3 ? 'd-none' : '' ?>" data-sampel="<?= $c->SAMPEL_NUM ?>" data-no="<?= $c->No ?>" id="btn-hapus">
+                                    <i class="fas fa-trash-alt"></i>
                                 </a>
                                 </a>
 

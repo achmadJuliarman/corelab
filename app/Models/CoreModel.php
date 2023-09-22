@@ -18,26 +18,32 @@ class CoreModel extends Model
     // protected $createdField  = 'created_at';
     // protected $updatedField  = 'updated_at';
 
-    public function search($keywords)
+    public function tampilDataAjax($keywords = null, $start=0, $length=0)
     {
+        $builder = $this->table('db_corestorage2007');
+        if($keywords){
+            $arr = explode(" ", $keywords);
+            for ($i=0; $i < count($arr) ; $i++) { 
+                $builder->like('SHIP', $arr[$i]);
+                $builder->orLike('CRUISE_', $arr[$i]);
+                $builder->orLike('SAMPEL_NUM', $arr[$i]);
+                $builder->orLike('DEVICE', $arr[$i]);
+                $builder->orLike('DEPTH', $arr[$i]);
+                $builder->orLike('SED_TYPE', $arr[$i]);
+                $builder->orLike('REMARK', $arr[$i]);
+                $builder->orLike('LATITUDE', $arr[$i]);
+                $builder->orLike('LONGITUDE', $arr[$i]);
+                $builder->orLike('LOCATION', $arr[$i]);
+            }
+        }
 
-        $db = \Config\Database::connect();
-        $query = $db->query("SELECT * FROM db_corestorage2007 
-            WHERE SHIP LIKE '%$keywords%' 
-            OR CRUISE_ LIKE '%$keywords%' 
-            OR SAMPEL_NUM LIKE '%$keywords%' 
-            OR DEVICE LIKE '%$keywords%' 
-            OR DATE LIKE '%$keywords%'  
-            OR DEPTH LIKE '%$keywords%' 
-            OR SED_TYPE LIKE '%$keywords%' 
-            OR REMARK LIKE '%$keywords%' 
-            OR VOL LIKE '%$keywords%' 
-            OR LATITUDE LIKE '%$keywords%' 
-            OR LONGITUDE LIKE '%$keywords%' 
-            OR LOCATION LIKE '%$keywords%'
-            ")->getResultObject();
+        // limitation
+        if($start != 0 || $length != 0)
+        {
+            $builder = $builder->limit($length, $start);
+        }
 
-        return $query;
+        return $builder->orderBy('No', 'ASC')->get()->getResult();
     }
 
 }

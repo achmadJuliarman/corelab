@@ -54,22 +54,8 @@
     </div>
     <div class="card mb-4">
         <div class="card-body">
-            <div class="input-group mb-3 mx-2 search">
-                <div class="row">
-                    <div class="col-md-8">
-                        <input type="text" class="form-control col-md-2" placeholder="Cari Disini .." aria-label="Recipient's username" aria-describedby="button-addon2" id="keywords">
-                    </div>
-                    <div class="col">
-                        <div class="spinner-border text-primary d-none" role="status" id="loader"> 
-                          <span class="visually-hidden">Loading...</span>
-                        </div>
-                    </div>  
-                </div>
-
-            </div>
-            <div id="core-ajax">
-            <table class="table table-striped table-hover">
-                <thead>
+            <table id="dataTable-core" class="display" style="width:100%">
+                <thead id="core-data" >
                     <tr>
                         <th>NO</th>
                         <th>SHIP</th>
@@ -82,45 +68,90 @@
                         <th>Action</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <?php foreach ($core as $c) : ?>
-                        <tr>
-                            <td><?= $c->No ?></td>
-                            <td><?= $c->SHIP ?></td>
-                            <td><?= $c->CRUISE_ ?></td>
-                            <td><?= $c->SAMPEL_NUM ?></td>
-                            <td><?= $c->DATE ?></td>
-                            <td><?= $c->DEPTH ?></td>
-                            <td><?= $c->LENGTH ?></td>
-                            <td><?= $c->LOCATION ?></td>
-                            <td>
-                                <a href="#" class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#modalDetail" data-sampel="<?= $c->SAMPEL_NUM ?>" data-no="<?= $c->No ?>" data-ship="<?= $c->SHIP ?>" data-cruise="<?= $c->CRUISE_ ?>" data-device="<?= $c->DEVICE ?>" data-sum="<?= $c->SUM ?>" data-date="<?= $c->DATE ?>" data-depth="<?= $c->DEPTH ?>" data-length="<?= $c->LENGTH ?>" data-location="<?= $c->LOCATION ?>" data-sed="<?= $c->SED_TYPE ?>" data-storage="<?= $c->STORAGE ?>" data-remark="<?= $c->REMARK ?>" data-vol="<?= $c->VOL ?>" data-latitude="<?= $c->LATITUDE ?>" data-longitude="<?= $c->LONGITUDE ?>" data-foto="<?= $c->FOTO_SPESIMEN ?>" id="btn-detail">
+                <tfoot>
+                    <tr>
+                        <th>NO</th>
+                        <th>SHIP</th>
+                        <th>Cruies</th>
+                        <th>Sampel Number</th>
+                        <th>Date</th>
+                        <th>Depth</th>
+                        <th>Length</th>
+                        <th>Location</th>
+                        <th>Action</th>
+                    </tr>
+                </tfoot>
+            </table>
+        <script>
+            // DATA TABLE SERVER SIDE
+            new DataTable('#dataTable-core', {
+                ajax: {
+                    // diarakan ke method cari di controller core
+                    url: '<?= base_url('core/cari') ?>',
+                    type: 'GET'
+                },
+                <?php if(session('ID_LEVEL') != 3 ) : ?>
+                columns: [
+                    { data: 'No' },
+                    { data: 'SHIP' },
+                    { data: 'CRUISE_' },
+                    { data: 'SAMPEL_NUM' },
+                    { data: 'DATE' },
+                    { data: 'DEPTH' },
+                    { data: 'LENGTH' },
+                    { data: 'LOCATION' },
+                    { data: 'null',
+                      render: function ( data, type, row, meta ) {
+                                return `<a href="#" class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#modalDetail" 
+                                data-sampel="${row.SAMPEL_NUM}" data-no="${row.No}" data-ship="${row.SHIP}" data-cruise="${row.CRUISE_}" 
+                                data-device="${row.DEVICE}" data-sum="${row.SUM}" data-date="${row.DATE}" data-depth="${row.DEPTH}" 
+                                data-length="${row.LENGTH}" data-location="${row.LOCATION}" data-sed="${row.SED_TYPE}" data-storage="${row.STORAGE}" 
+                                data-remark="${row.REMARK}" data-vol="${row.VOL}" data-latitude="${row.LATITUDE}" data-longitude="${row.LONGITUDE}" 
+                                data-foto="${row.FOTO_SPESIMEN }" id="btn-detail">
                                     <i class="fa-solid fa-eye"></i>
                                 </a>
-                                <!--  -->
-                                <a href="" class="btn btn-success btn-sm <?= session('ID_LEVEL') == 3 ? 'd-none' : '' ?>" data-bs-toggle="modal" data-bs-target="#modalUbah" data-sampel="<?= $c->SAMPEL_NUM ?>" data-no="<?= $c->No ?>" data-ship="<?= $c->SHIP ?>" data-cruise="<?= $c->CRUISE_ ?>" data-device="<?= $c->DEVICE ?>" data-sum="<?= $c->SUM ?>" data-date="<?= $c->DATE ?>" data-depth="<?= $c->DEPTH ?>" data-length="<?= $c->LENGTH ?>" data-location="<?= $c->LOCATION ?>" data-sed="<?= $c->SED_TYPE ?>" data-storage="<?= $c->STORAGE ?>" data-remark="<?= $c->REMARK ?>" data-vol="<?= $c->VOL ?>" data-latitude="<?= $c->LATITUDE ?>" data-longitude="<?= $c->LONGITUDE ?>" data-foto="<?= $c->FOTO_SPESIMEN ?>" id="btn-ubah">
+                                <a href="" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#modalUbah" id="btn-ubah" 
+                                data-sampel="${row.SAMPEL_NUM}" data-no="${row.No }" data-ship="${row.SHIP }" data-cruise="${row.CRUISE_ }" 
+                                data-device="${row.DEVICE}" data-sum="${row.SUM }" data-date="${row.DATE }" data-depth="${row.DEPTH }" 
+                                data-length="${row.LENGTH }" data-location="${row.LOCATION }" data-sed="${row.SED_TYPE }" data-storage="${row.STORAGE }" 
+                                data-remark="${row.REMARK }" data-vol="${row.VOL }" data-latitude="${row.LATITUDE }" data-longitude="${row.LONGITUDE }" 
+                                data-foto="${row.FOTO_SPESIMEN }">
                                     <l class="fas fa-edit"></l>
                                 </a>
-
-
-                                <!--  -->
-                              <!--  <a href="#" class="btn btn-danger btn-sm <?= session('ID_LEVEL') == 3 ? 'd-none' : '' ?>" data-bs-toggle="modal" data-bs-target="#modalHapus" data-sampel="<?= $c->SAMPEL_NUM ?>" data-no="<?= $c->No ?>" id="btn-hapus">
-                                <i class="fas fa-trash-alt"></i> -->
-
-                                <a href="#" class="btn btn-danger btn-sm <?= session('ID_LEVEL') == 3 ? 'd-none' : '' ?>" data-sampel="<?= $c->SAMPEL_NUM ?>" data-no="<?= $c->No ?>" id="btn-hapus">
-                                <i class="fas fa-trash-alt"></i>
-                                </a>
-                                </a>
-
-                            </td>
-                        </tr>
-                    <?php endforeach; ?>
-                </tbody>
-            </table>
-            </div>
-            <!-- links('nama tabel', 'nama file pagination') -->
-            <!-- nama table ini diambil sesuai dengan yang dikirimkan di controller didalam parameter paginate() -->
-            <?= $pager->links('core', 'core_pagination') ?>
+                                <a href="#" class="btn btn-danger btn-sm" data-sampel="${row.SAMPEL_NUM}" data-no="${row.No }" id="btn-hapus">
+                                    <i class="fas fa-trash-alt"></i>
+                                </a>`;
+                            } 
+                    },
+                ],
+                <?php else :  ?>
+                columns: [
+                    { data: 'No' },
+                    { data: 'SHIP' },
+                    { data: 'CRUISE_' },
+                    { data: 'SAMPEL_NUM' },
+                    { data: 'DATE' },
+                    { data: 'DEPTH' },
+                    { data: 'LENGTH' },
+                    { data: 'LOCATION' },
+                    { data: 'null',
+                      render: function ( data, type, row, meta ) {
+                                return `<a href="#" class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#modalDetail" 
+                                data-sampel="${row.SAMPEL_NUM}" data-no="${row.No}" data-ship="${row.SHIP}" data-cruise="${row.CRUISE_}" 
+                                data-device="${row.DEVICE}" data-sum="${row.SUM}" data-date="${row.DATE}" data-depth="${row.DEPTH}" 
+                                data-length="${row.LENGTH}" data-location="${row.LOCATION}" data-sed="${row.SED_TYPE}" data-storage="${row.STORAGE}" 
+                                data-remark="${row.REMARK}" data-vol="${row.VOL}" data-latitude="${row.LATITUDE}" data-longitude="${row.LONGITUDE}" 
+                                data-foto="${row.FOTO_SPESIMEN }" id="btn-detail">
+                                    <i class="fa-solid fa-eye"></i>
+                                </a>`;
+                            } 
+                    },
+                ],
+                <?php endif; ?>
+                processing: true,
+                serverSide: true
+            });
+        </script>
         </div>
     </div>
 </div>
@@ -422,32 +453,6 @@
     </div>
 </div>
 <!-- END MODAL BOX DETAIL -->
-
-<!-- LIVE SEARCH AJAX -->
-<script>
-    // SEARCH EVENt
-    $('#keywords').on('keyup', function(){
-        const content = $('#core-ajax');
-        const keywords = $(this).val();
-        $('#loader').removeClass("d-none");
-
-        $.ajax({
-            url: "<?= base_url('core/cari') ?>",
-            type: "GET",
-            data: {
-                keywords: keywords
-            },
-            success : function(data){
-                content.html(data)
-                content.children().ready(function(){
-                    $('#loader').hide();
-                })
-            }
-            
-        })
-    });
-</script>
-<!-- END LIVE SEARCH AJAX -->
 
 <script>
     const urlParams = new URLSearchParams(window.location.search);
