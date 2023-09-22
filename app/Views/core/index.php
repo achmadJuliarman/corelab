@@ -84,7 +84,8 @@
             </table>
         <script>
             // DATA TABLE SERVER SIDE
-            new DataTable('#dataTable-core', {
+            new DataTable('#dataTable-core', 
+            {
                 ajax: {
                     // diarakan ke method cari di controller core
                     url: '<?= base_url('core/cari') ?>',
