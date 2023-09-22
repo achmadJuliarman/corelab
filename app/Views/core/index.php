@@ -383,33 +383,6 @@
         </div>
     </div>
 </div>
-<!-- <div class="modal fade" id="modalHapus" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header bg-danger text-white">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">
-                    <i class="fa-duotone fa-octagon-plus"></i>Yakin Hapus Data Berikut ?
-                </h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <form action="<?= base_url('core/hapus') ?>" method="post">
-                    <?= csrf_field() ?>
-                    <div class="mb-3">
-                        <input type="hidden" name="_method" value="DELETE">
-                        <input type="hidden" name="no" value="" id="no">
-                        <label for="sampel_num">Sampel Num</label>
-                        <input type="text" name="sampel_num" id="sampel_num" class="form-control" required readonly>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-danger">YA</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-</div> -->
 <!-- END MODAL HAPUS -->
 
 
